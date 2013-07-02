@@ -43,13 +43,19 @@ public class CommandKick implements CommandExecutor {
 					
 					final Player targetPlayer = Bukkit.getServer().getPlayer(args[0]);
 					
-					if(targetPlayer != null) {
+					if(targetPlayer == null) {
+						sender.sendMessage(ChatColor.RED + args[0] + " is not online");
+					}
+					else {
 						
 						File file = new File(plugin.getDataFolder() + "/userdata/" + targetPlayer.getName().toLowerCase() + ".yml");
 						YamlConfiguration userFile = YamlConfiguration.loadConfiguration(file);
 						List<String> noteList = userFile.getStringList("notes");
 						
-						if(userFile.getBoolean("KickExempt") == false) {
+						if(userFile.getBoolean("KickExempt") == true) {
+							sender.sendMessage(ChatColor.RED + targetPlayer.getName() + " is exempt from being kicked");
+						}
+						else {
 							common.createNewFile(file);
 							for(int arg = 1; arg < args.length; arg = arg+1) {
 								strBuilder.append(args[arg] + " ");
@@ -66,13 +72,6 @@ public class CommandKick implements CommandExecutor {
 							}
 							common.saveYamlFile(userFile, file);
 						}
-						
-						else {
-							sender.sendMessage(ChatColor.RED + targetPlayer.getName() + " is exempt from being kicked");
-						}
-					}
-					else {
-						sender.sendMessage(ChatColor.RED + args[0] + " is not online");
 					}
 				}
 			}

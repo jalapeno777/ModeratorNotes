@@ -58,8 +58,14 @@ public class CommandTempban implements CommandExecutor {
 					YamlConfiguration userFile = YamlConfiguration.loadConfiguration(file);
 					List<String> noteList = userFile.getStringList("notes");						
 					
-					if(userFile.getBoolean("BanExempt") == false) {
-						if(!targetPlayer.isBanned() || userFile.get("permaban") != null) {
+					if(userFile.getBoolean("BanExempt") == true) {
+						sender.sendMessage(ChatColor.RED + targetPlayer.getName() + " is exempt from being banned");
+					}
+					else {
+						if(targetPlayer.isBanned() || userFile.get("permaban") == null) {
+							sender.sendMessage(ChatColor.RED + targetPlayer.getName() + " is already permanently banned");
+						}
+						else {
 							double unbanTime = 0;
 							Pattern pattern = Pattern.compile("(\\d+\\.?\\d*)([wdhms]{1})");
 							Matcher matcher = pattern.matcher(args[1]);
@@ -113,14 +119,6 @@ public class CommandTempban implements CommandExecutor {
 								common.saveYamlFile(userFile, file);
 							}
 						}
-							
-						else {
-							sender.sendMessage(ChatColor.RED + targetPlayer.getName() + " is already permanently banned");
-						}
-					}
-					
-					else {
-						sender.sendMessage(ChatColor.RED + targetPlayer.getName() + " is exempt from being banned");
 					}	
 				}
 			}

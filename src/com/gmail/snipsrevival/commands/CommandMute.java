@@ -54,9 +54,15 @@ public class CommandMute implements CommandExecutor {
 					YamlConfiguration userFile = YamlConfiguration.loadConfiguration(file);
 					List<String> noteList = userFile.getStringList("notes");
 					
-					if(userFile.getBoolean("MuteExempt") == false) {
+					if(userFile.getBoolean("MuteExempt") == true) {
+						sender.sendMessage(ChatColor.RED + targetPlayer.getName() + " is exempt from being muted");
+					}
+					else {
 
-						if(userFile.getBoolean("permamute.muted") == false || !file.exists()) {
+						if(userFile.getBoolean("permamute.muted") == true) {
+							sender.sendMessage(ChatColor.RED + targetPlayer.getName() + " is already muted");
+						}
+						else {
 							common.createNewFile(file);
 							userFile.set("permamute.muted", true);	
 							for(int arg = 1; arg < args.length; arg = arg+1) {
@@ -74,13 +80,6 @@ public class CommandMute implements CommandExecutor {
 							}
 							common.saveYamlFile(userFile, file);
 						}
-				
-						else {
-							sender.sendMessage(ChatColor.RED + targetPlayer.getName() + " is already muted");
-						}
-					}
-					else {
-						sender.sendMessage(ChatColor.RED + targetPlayer.getName() + " is exempt from being muted");
 					}
 				}
 			}

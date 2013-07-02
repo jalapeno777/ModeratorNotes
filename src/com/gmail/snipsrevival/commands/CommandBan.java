@@ -53,8 +53,14 @@ public class CommandBan implements CommandExecutor {
 					YamlConfiguration userFile = YamlConfiguration.loadConfiguration(file);
 					List<String> noteList = userFile.getStringList("notes");
 					
-					if(userFile.getBoolean("BanExempt") == false) {
-						if(!targetPlayer.isBanned()) {
+					if(userFile.getBoolean("BanExempt") == true) {
+						sender.sendMessage(ChatColor.RED + targetPlayer.getName() + " is exempt from being banned");
+					}
+					else {
+						if(targetPlayer.isBanned()) {
+							sender.sendMessage(ChatColor.RED + targetPlayer.getName() + " is already banned");
+						}
+						else {
 							common.createNewFile(file);
 							targetPlayer.setBanned(true);
 							for(int arg = 1; arg < args.length; arg = arg+1) {
@@ -75,13 +81,6 @@ public class CommandBan implements CommandExecutor {
 							}
 							common.saveYamlFile(userFile, file);
 						}
-			
-						else {
-							sender.sendMessage(ChatColor.RED + targetPlayer.getName() + " is already banned");
-						}
-					}
-					else {
-						sender.sendMessage(ChatColor.RED + targetPlayer.getName() + " is exempt from being banned");
 					}
 				}
 			}

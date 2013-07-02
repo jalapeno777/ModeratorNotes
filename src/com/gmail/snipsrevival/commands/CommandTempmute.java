@@ -58,8 +58,14 @@ public class CommandTempmute implements CommandExecutor {
 					YamlConfiguration userFile = YamlConfiguration.loadConfiguration(file);
 					List<String> noteList = userFile.getStringList("notes");						
 					
-					if(userFile.getBoolean("MuteExempt") == false) {
-						if(userFile.getBoolean("permamute.muted") == false || !file.exists()) {
+					if(userFile.getBoolean("MuteExempt") == true) {
+						sender.sendMessage(ChatColor.RED + targetPlayer.getName() + " is exempt from being muted");
+					}
+					else {
+						if(userFile.getBoolean("permamute.muted") == true) {
+							sender.sendMessage(ChatColor.RED + targetPlayer.getName() + " is already permanently muted");
+						}
+						else {
 							double unmuteTime = 0;
 
 							Pattern pattern = Pattern.compile("(\\d+\\.?\\d*)([wdhms]{1})");
@@ -115,13 +121,6 @@ public class CommandTempmute implements CommandExecutor {
 								common.saveYamlFile(userFile, file);
 							}	
 						}
-						
-						else {
-							sender.sendMessage(ChatColor.RED + targetPlayer.getName() + " is already permanently muted");
-						}
-					}
-					else {
-						sender.sendMessage(ChatColor.RED + targetPlayer.getName() + " is exempt from being muted");
 					}
 				}
 			}

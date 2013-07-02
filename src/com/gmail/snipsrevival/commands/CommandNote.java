@@ -85,7 +85,7 @@ public class CommandNote implements CommandExecutor {
 		StringBuilder strBuilder = new StringBuilder();			
 		String prefix = new Prefix(plugin).getPrefix(sender);
 		
-		if(common.nameContainsInvalidCharacter(args[0])) {
+		if(common.nameContainsInvalidCharacter(args[1])) {
 			sender.sendMessage(ChatColor.RED + "That is an invalid playername");
 			return true;
 		}
@@ -242,7 +242,7 @@ public class CommandNote implements CommandExecutor {
 			return true;
 		}
 			
-		if(common.nameContainsInvalidCharacter(args[0])) {
+		if(common.nameContainsInvalidCharacter(args[1])) {
 			sender.sendMessage(ChatColor.RED + "That is an invalid playername");
 			return true;
 		}
@@ -293,7 +293,7 @@ public class CommandNote implements CommandExecutor {
 			return true;
 		}
 					
-		if(common.nameContainsInvalidCharacter(args[0])) {
+		if(common.nameContainsInvalidCharacter(args[1])) {
 			sender.sendMessage(ChatColor.RED + "That is an invalid playername");
 			return true;
 		}

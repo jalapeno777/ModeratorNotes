@@ -1,0 +1,145 @@
+name: ModeratorNotes
+main: com.gmail.snipsrevival.ModeratorNotes
+version: 2.0.2
+author: SnipsRevival
+description: Create notes about players to keep your staff informed at all times!
+load: STARTUP
+commands:
+  note:
+    aliases: reminder
+    usage: /note <add|read|remove|removeall> <playername> [message|page #|note #]
+  mail:
+    usage: /mail <send|sendall|sendstaff|read|remove|removeall> [playername|message|page #|note #] [message]
+  moderatornotes:
+    aliases: mn
+    usage: /moderatornotes reload
+  ban:
+    usage: /ban <playername> [reason]
+  tempban:
+    usage: /tempban <playername> <time> [reason]
+    aliases: tban
+  unban:
+    usage: /unban <playername> [reason]
+  kick:
+    usage: /kick <playername> [reason]
+  mute:
+    usage: /mute <playername> [reason]
+  tempmute:
+    usage: /tempmute <playername> <time> [reason]
+    aliases: tmute
+  unmute:
+    usage: /unmute <playername> [reason]
+  warn:
+    usage: /warn <playername> <reason>
+  rules:
+    usage: /rules [page #]
+  info:
+    usage: /info [topic] [page #]
+permissions:
+  moderatornotes.*:
+    description: gives access to all ModeratorNotes commands and permissions
+    children:
+      moderatornotes.mail.*: true
+      moderatornotes.note.*: true
+      moderatornotes.reload: true
+      moderatornotes.ban: true
+      moderatornotes.tempban: true
+      moderatornotes.unban: true
+      moderatornotes.kick: true
+      moderatornotes.mute: true
+      moderatornotes.tempmute: true
+      moderatornotes.unmute: true
+      moderatornotes.warn: true
+      moderatornotes.banexempt: true
+      moderatornotes.muteexempt: true
+      moderatornotes.kickexempt: true
+      moderatornotes.rules: true
+      moderatornotes.info: true
+      moderatornotes.staffmember: true
+  moderatornotes.note.*:
+    description: gives access to all note commands and permissions
+    children:
+      moderatornotes.note.read: true
+      moderatornotes.note.read.self: true
+      moderatornotes.note.add: true
+      moderatornotes.note.remove: true
+  moderatornotes.mail.*:
+    description: gives access to all mail commands and permissions
+    children:
+      moderatornotes.mail.read: true
+      moderatornotes.mail.send: true
+      moderatornotes.mail.sendall: true
+      moderatornotes.mail.sendstaff: true
+      moderatornotes.mail.remove: true
+  moderatornotes.note.read:
+    description: allows sender to read  notes
+    default: op
+  moderatornotes.note.read.self:
+    description: allows sender to read only notes about him/herself
+    default: false
+  moderatornotes.note.add:
+    description: allows sender to add notes
+    default: op
+  moderatornotes.note.remove:
+    description: allows sender to remove notes
+    default: op
+  moderatornotes.mail.read:
+    description: allows sender to read messages in his/her mailbox
+    default: op
+  moderatornotes.mail.send:
+    description: allows sender to send a message to a player's mailbox
+    default: op
+  moderatornotes.mail.sendall:
+    description: allows sender to send a message to all players' mailboxes
+    default: op
+  moderatornotes.mail.sendstaff:
+    description: allows sender to send a message to all staff members' mailboxes
+    default: op
+  moderatornotes.mail.remove:
+    description: allows sender to remove a message from his/her mailbox
+    default: op
+  moderatornotes.reload:
+    description: allows sender to reload the configuration file
+    default: op
+  moderatornotes.ban:
+    description: allows sender to ban other players
+    default: op
+  moderatornotes.tempban:
+    description: allows sender to tempban other players
+    default: op
+  moderatornotes.unban:
+    description: allows sender to unban other players
+    default: op
+  moderatornotes.kick:
+    description: allows sender to kick other players
+    default: op
+  moderatornotes.mute:
+    description: allows sender to mute other players
+    default: op
+  moderatornotes.tempmute:
+    description: allows sender to tempmute other players
+    default: op
+  moderatornotes.unmute:
+    description: allows sender to unmute other players
+    default: op
+  moderatornotes.warn:
+    description: allows sender to warn other players
+    default: op
+  moderatornotes.banexempt:
+    description: prevents player from being banned or tempbanned
+    default: op
+  moderatornotes.muteexempt:
+    description: prevents player from being muted or tempmuted
+    default: op
+  moderatornotes.kickexempt:
+    description: prevents player from being kicked
+    default: op
+  moderatornotes.rules:
+    description: allows sender to use the /rules command
+    default: op
+  moderatornotes.info:
+    description: allows sender to use the /info command
+    default: op
+  moderatornotes.staffmember:
+    description: this permission will identify your staff members
+    default: op

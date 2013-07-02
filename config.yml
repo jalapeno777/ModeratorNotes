@@ -1,0 +1,117 @@
+# This is the configuration file for ModeratorNotes
+# This plugin was created by SnipsRevival
+
+# Setting the following to true will enable ModeratorNotes
+# to check if a newer version of this plugin is available.
+# If a newer version is found, you will be notified in the console
+# when the plugin is enabled and when you log in if you are an op
+
+EnableUpdateChecker: true
+
+# The prefix will come before every single message made using both /note and /mail.
+# The prefix supports colour codes. You can find a list of the colour codes here:
+# http://www.minecraftwiki.net/wiki/Formatting_codes
+
+# The prefix also supports the following variables:
+# <MM> will produce the current month as a 2-digit number
+# <MMM> will produce the current month as a 3-letter abbreviation
+# <MMMM> will produce the current month as a full word
+# <dd> will produce the current day of the month as a 2-digit number
+# <yy> will produce the current year as a 2-digit number
+# <yyyy> will produce the current year as a 4-digit number
+# <HH> will produce the current hour of the day in a 24-hour clock
+# <hh> will produce the current hour of the day in a 12-hour clock
+# <mm> will produce the current minute within an hour
+# <ss> will produce the current second within a minute
+# <a> will mark whether the time is in AM or PM
+# <Z> will produce the time zone your server is in a 3-letter format
+# <playername> will produce the name of the player who recorded a note
+# <index> will produce the number of the note
+# For example, "<MM>/<dd>/<yyyy>" will produce "03/28/2013" on March 28, 2013.
+
+Prefix: '&e[<index>] <MM>/<dd>/<yyyy> by <playername>: &f'
+
+# If a player has a note saved in their mailbox, setting this to true
+# will remind them that their mailbox is not empty EVERY time they login,
+# regardless of whether or not the note has been read before.
+# Setting this to false will only tell your players if there is
+# a NEW message in their mailbox.
+
+AlwaysNotifyMailboxMessage: false
+
+# Setting this to true will automatically send a message to your 
+# staff members whenever a note is created
+
+NotifyStaffNewNote: true
+
+# Setting the fhe following to false will disable the respective commands
+# allowing you to use another plugin's version of these commands.
+# Note that you will not be able to automatically record notes for these
+# commands if you set these to false.
+
+UseBan: true
+UseTempban: true
+UseUnban: true
+UseKick: true
+UseMute: true
+UseTempmute: true
+UseUnmute: true
+UseWarn: true
+UseInfo: true
+UseRules: true
+
+# Setting the following to true will automatically record
+# a note when the respective commands are used.
+# You MUST have the settings above set to true
+# in order to use these features
+
+AutoRecordBans: true
+AutoRecordTempbans: true
+AutoRecordUnbans: true
+AutoRecordKicks: true
+AutoRecordMutes: true
+AutoRecordTempmutes: true
+AutoRecordUnmutes: true
+AutoRecordWarns: true
+
+# The following is a list of rules that can be viewed using /rules
+# The rules may contain colour codes
+
+Rules:
+- 'This is rule #1'
+- 'This is rule #2'
+- 'etc'
+
+# The section below can by players who have the
+# permission moderatornotes.info but DO NOT have
+# the permission moderatornotes.staffmember
+# The information stored here is accessed via /info
+
+Info:
+  Topic1:
+  - 'write whatever you want'
+  - 'and as many things as you want'
+  Topic2:
+  - 'also add as many topics as you want'
+  - 'and rename them to whatever you want'
+  
+# The section below stores info that only players who have
+# the permission moderatornotes.staffmember can see.
+# Note that that those players will not be able
+# to access the information stored in the section above,
+# so it is recommended you also add the above information to the
+# section below
+
+StaffInfo:
+  Topic1:
+  - 'the info stored here can only be seen by players with the permission moderatornotes.staffmember'
+
+# Set a number of messages to be displayed per "page"
+# If there are more messages than whichever number you set below,
+# then the remaining messages will be moved onto the next page
+
+MessagesPerPage:
+  Notes: 5
+  Mail: 5
+  Rules: 5
+  Info: 5

@@ -2,14 +2,11 @@ package com.gmail.snipsrevival;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 public class CommonUtilities {
@@ -20,31 +17,6 @@ public class CommonUtilities {
 	
 	public CommonUtilities(ModeratorNotes plugin) {
 		this.plugin = plugin;
-	}
-	
-	/**
-	 * Gets the prefix that is set in the config file.
-	 * 
-	 * @return the prefix in the form of a <tt>String</tt>
-	 */
-	
-	public String getPrefix() {
-		Date date = new Date();
-		String prefix = plugin.getConfig().getString("Prefix");
-		prefix = ChatColor.translateAlternateColorCodes('&', prefix);
-		prefix = prefix.replace("<MM>", new SimpleDateFormat("MM").format(date));
-		prefix = prefix.replace("<MMM>", new SimpleDateFormat("MMM").format(date));
-		prefix = prefix.replace("<MMMM>", new SimpleDateFormat("MMMM").format(date));
-		prefix = prefix.replace("<dd>", new SimpleDateFormat("dd").format(date));
-		prefix = prefix.replace("<yyyy>", new SimpleDateFormat("yyyy").format(date));
-		prefix = prefix.replace("<yy>", new SimpleDateFormat("yy").format(date));
-		prefix = prefix.replace("<HH>", new SimpleDateFormat("HH").format(date));
-		prefix = prefix.replace("<hh>", new SimpleDateFormat("hh").format(date));
-		prefix = prefix.replace("<mm>", new SimpleDateFormat("mm").format(date));
-		prefix = prefix.replace("<ss>", new SimpleDateFormat("ss").format(date));
-		prefix = prefix.replace("<a>", new SimpleDateFormat("a").format(date));
-		prefix = prefix.replace("<Z>", new SimpleDateFormat("z").format(date));
-		return prefix;
 	}
 	
 	/**

@@ -168,17 +168,3 @@ public class ModeratorNotes extends JavaPlugin implements Listener {
 		plugin = null;
 	}
 }
-//					Next Version				//
-
-//send warned player message (not just mail)
-
-//					Future Features				//
-
-
-//	make mailbox notifications more frequent than just player joins
-
-//	add MySQL support so that notes can be shared between multiple servers
-
-//	POSSIBLY add private messages along with a socialspy feature
-
-//	TEST MAIL LOGIN LISTENERS

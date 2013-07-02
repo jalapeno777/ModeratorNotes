@@ -57,7 +57,7 @@ public class CommandUnban implements CommandExecutor {
 			}
 			String message = strBuilder.toString().trim();
 			
-			if((userFile.get("permaban") == null && userFile.get("tempban") == null) || !targetPlayer.isBanned()) {
+			if(userFile.get("permaban") == null && userFile.get("tempban") == null && !targetPlayer.isBanned()) {
 				sender.sendMessage(ChatColor.RED + targetPlayer.getName() + " is not banned");
 				return true;
 			}

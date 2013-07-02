@@ -50,8 +50,8 @@ public class CommandWarn implements CommandExecutor {
 					
 					File file = new File(plugin.getDataFolder() + "/userdata/" + targetPlayer.getName().toLowerCase() + ".yml");
 					YamlConfiguration userFile = YamlConfiguration.loadConfiguration(file);
-					List<String> noteList = (List<String>) userFile.getStringList("notes");
-					List<String> mailListNew = (List<String>) userFile.getStringList("mail.new");
+					List<String> noteList = userFile.getStringList("notes");
+					List<String> mailListNew = userFile.getStringList("mail.new");
 					
 					for(int arg = 1; arg < args.length; arg++) {
 						strBuilder.append(args[arg] + " ");

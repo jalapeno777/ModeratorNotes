@@ -1,7 +1,7 @@
 package com.gmail.snipsrevival.commands;
 
 import java.io.File;
-import java.util.ArrayList;
+import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -49,7 +49,7 @@ public class CommandUnmute implements CommandExecutor {
 											
 					File file = new File(plugin.getDataFolder() + "/userdata/" + targetPlayer.getName().toLowerCase() + ".yml");
 					YamlConfiguration userFile = YamlConfiguration.loadConfiguration(file);
-					ArrayList<String> noteList = (ArrayList<String>) userFile.getStringList("notes");
+					List<String> noteList = userFile.getStringList("notes");
 					
 					if(userFile.get("permamute") == null && userFile.get("tempmute") == null) {
 						sender.sendMessage(ChatColor.RED + targetPlayer.getName() + " is not muted");

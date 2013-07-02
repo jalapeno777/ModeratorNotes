@@ -2,8 +2,8 @@ package com.gmail.snipsrevival.commands;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -53,7 +53,7 @@ public class CommandTempban implements CommandExecutor {
 										
 					File file = new File(plugin.getDataFolder() + "/userdata/" + targetPlayer.getName().toLowerCase() + ".yml");
 					YamlConfiguration userFile = YamlConfiguration.loadConfiguration(file);
-					ArrayList<String> noteList = (ArrayList<String>) userFile.getStringList("notes");						
+					List<String> noteList = userFile.getStringList("notes");						
 					
 					if(userFile.getBoolean("BanExempt") == false) {
 						if(!targetPlayer.isBanned() || userFile.get("permaban") != null) {

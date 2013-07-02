@@ -102,7 +102,7 @@ public class CommandNote implements CommandExecutor {
 			
 			File file = new File(plugin.getDataFolder() + "/userdata/" + targetPlayer.getName().toLowerCase() + ".yml");
 			YamlConfiguration userFile = YamlConfiguration.loadConfiguration(file);
-			List<String> notelist = (List<String>) userFile.getStringList("notes");
+			List<String> notelist = userFile.getStringList("notes");
 			
 			notelist.add(prefix + message);
 			common.addStringStaffList(prefix + "Note about " + targetPlayer.getName() + ": " + message);
@@ -124,7 +124,7 @@ public class CommandNote implements CommandExecutor {
 				for(File f : children) {
 					File childFile = new File(plugin.getDataFolder() + "/userdata/" + f.getName());
 					YamlConfiguration childUserFile = YamlConfiguration.loadConfiguration(childFile);
-					List<String> noteList = (List<String>) childUserFile.getStringList("notes");
+					List<String> noteList = childUserFile.getStringList("notes");
 					String fileListWithExt = childFile.getName();
 					int pos = fileListWithExt.lastIndexOf(".");
 					if(pos != -1) {
@@ -195,7 +195,7 @@ public class CommandNote implements CommandExecutor {
 			YamlConfiguration userFile = YamlConfiguration.loadConfiguration(file);
 			
 			if(targetPlayer.getName().equalsIgnoreCase(sender.getName()) || sender.hasPermission("moderatornotes.note.read")) {	
-				List<String> inputList = (List<String>) userFile.getStringList("notes");
+				List<String> inputList = userFile.getStringList("notes");
 				double configNumber = plugin.getConfig().getDouble("MessagesPerPage.Notes");
 				List<String> outputList;
 				int totalPages = common.getTotalPages(inputList, configNumber);
@@ -262,7 +262,7 @@ public class CommandNote implements CommandExecutor {
 									
 					File file = new File(plugin.getDataFolder() + "/userdata/" + targetPlayer.getName().toLowerCase() + ".yml");
 					YamlConfiguration userFile = YamlConfiguration.loadConfiguration(file);
-					List<String> noteList = (List<String>) userFile.getStringList("notes");
+					List<String> noteList = userFile.getStringList("notes");
 					int number = Integer.parseInt(args[2]);
 					
 					if(file.exists() && !noteList.isEmpty()) {
@@ -330,7 +330,7 @@ public class CommandNote implements CommandExecutor {
 					sender.sendMessage(ChatColor.GREEN + "All notes for " + targetPlayer.getName() + " have been removed");
 				}
 				else {
-					ArrayList<String> noteList = (ArrayList<String>) userFile.getStringList("notes");
+					List<String> noteList = userFile.getStringList("notes");
 	
 					noteList.clear();
 					userFile.set("notes", noteList);

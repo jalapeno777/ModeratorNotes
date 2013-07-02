@@ -37,8 +37,8 @@ public class PlayerListener implements Listener {
 		final Player player = event.getPlayer();
 		File file = new File(plugin.getDataFolder() + "/userdata/" + player.getName().toLowerCase() + ".yml");
 		YamlConfiguration userFile = YamlConfiguration.loadConfiguration(file);
-		List<String> mailListNew = (List<String>) userFile.getStringList("mail.new");
-		List<String> mailListRead = (List<String>) userFile.getStringList("mail.read");
+		List<String> mailListNew = userFile.getStringList("mail.new");
+		List<String> mailListRead = userFile.getStringList("mail.read");
 		
 		if(player.isOp()) {
 			Updater updater = new Updater(plugin);
@@ -92,8 +92,8 @@ public class PlayerListener implements Listener {
 		Player player = event.getPlayer();
 		File file = new File(plugin.getDataFolder() + "/userdata/" + player.getName().toLowerCase() + ".yml");
 		YamlConfiguration userFile = YamlConfiguration.loadConfiguration(file);
-		ArrayList<String> mailListNew = (ArrayList<String>) userFile.getStringList("mail.new");
-		ArrayList<String> mailListRead = (ArrayList<String>) userFile.getStringList("mail.read");
+		List<String> mailListNew = userFile.getStringList("mail.new");
+		List<String> mailListRead = userFile.getStringList("mail.read");
 	
 		if(player.hasPermission("moderatornotes.banexempt")) userFile.set("BanExempt", true);
 		if(player.hasPermission("moderatornotes.muteexempt")) userFile.set("MuteExempt", true);

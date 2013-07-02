@@ -48,7 +48,7 @@ public class CommandBan implements CommandExecutor {
 													
 					File file = new File(plugin.getDataFolder() + "/userdata/" + targetPlayer.getName().toLowerCase() + ".yml");
 					YamlConfiguration userFile = YamlConfiguration.loadConfiguration(file);
-					List<String> noteList = (List<String>) userFile.getStringList("notes");
+					List<String> noteList = userFile.getStringList("notes");
 					
 					if(userFile.getBoolean("BanExempt") == false) {
 						if(!targetPlayer.isBanned()) {

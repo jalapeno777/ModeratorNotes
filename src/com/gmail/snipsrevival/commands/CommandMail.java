@@ -84,8 +84,8 @@ public class CommandMail implements CommandExecutor {
 		
 		File file = new File(plugin.getDataFolder() + "/userdata/" + sender.getName() + ".yml");
 		YamlConfiguration userFile = YamlConfiguration.loadConfiguration(file);
-		List<String> mailListNew = (List<String>) userFile.getStringList("mail.new");
-		List<String> mailListRead = (List<String>) userFile.getStringList("mail.read");
+		List<String> mailListNew = userFile.getStringList("mail.new");
+		List<String> mailListRead = userFile.getStringList("mail.read");
 		
 		if(sender instanceof Player) {	
 			if(args.length == 1 || args.length == 2) {
@@ -155,8 +155,8 @@ public class CommandMail implements CommandExecutor {
 		
 		File file = new File(plugin.getDataFolder() + "/userdata/" + sender.getName() + ".yml");
 		YamlConfiguration userFile = YamlConfiguration.loadConfiguration(file);
-		List<String> mailListNew = (List<String>) userFile.getStringList("mail.new");
-		List<String> mailListRead = (List<String>) userFile.getStringList("mail.read");
+		List<String> mailListNew = userFile.getStringList("mail.new");
+		List<String> mailListRead = userFile.getStringList("mail.read");
 		
 		if(sender instanceof Player) {
 			if(args.length == 1) {
@@ -210,8 +210,8 @@ public class CommandMail implements CommandExecutor {
 		
 		File file = new File(plugin.getDataFolder() + "/userdata/" + sender.getName() + ".yml");
 		YamlConfiguration userFile = YamlConfiguration.loadConfiguration(file);
-		List<String> mailListNew = (List<String>) userFile.getStringList("mail.new");
-		List<String> mailListRead = (List<String>) userFile.getStringList("mail.read");
+		List<String> mailListNew = userFile.getStringList("mail.new");
+		List<String> mailListRead = userFile.getStringList("mail.read");
 		
 		if(sender instanceof Player) {	
 			if(args.length == 1) {
@@ -267,7 +267,7 @@ public class CommandMail implements CommandExecutor {
 			if(children != null) {				
 				File childFile = new File(plugin.getDataFolder() + "/userdata/" + targetPlayer.getName().toLowerCase() + ".yml");
 				YamlConfiguration userFile = YamlConfiguration.loadConfiguration(childFile);
-				List<String> mailListNew = (List<String>) userFile.getStringList("mail.new");
+				List<String> mailListNew = userFile.getStringList("mail.new");
 				if(childFile.exists()) {
 					mailListNew.add(prefix + message);
 					userFile.set("mail.new", mailListNew);
@@ -307,7 +307,7 @@ public class CommandMail implements CommandExecutor {
 				for(int i = 0; i < children.length; i++) {
 					File childFile = new File(plugin.getDataFolder() + "/userdata/" + children[i].getName());
 					YamlConfiguration userFile = YamlConfiguration.loadConfiguration(childFile);
-					List<String> mailListNew = (List<String>) userFile.getStringList("mail.new");
+					List<String> mailListNew = userFile.getStringList("mail.new");
 					mailListNew.add(prefix + message);
 					userFile.set("mail.new", mailListNew);
 					common.saveYamlFile(userFile, childFile);	
@@ -343,7 +343,7 @@ public class CommandMail implements CommandExecutor {
 				for(int i = 0; i < children.length; i++) {
 					File childFile = new File(plugin.getDataFolder() + "/userdata/" + children[i].getName());
 					YamlConfiguration userFile = YamlConfiguration.loadConfiguration(childFile);
-					List<String> mailListNew = (List<String>) userFile.getStringList("mail.new");
+					List<String> mailListNew = userFile.getStringList("mail.new");
 					if(userFile.getBoolean("staffmember") == true) {
 						mailListNew.add(prefix + message);
 						userFile.set("mail.new", mailListNew);

@@ -95,7 +95,7 @@ public class CommandTempmute implements CommandExecutor {
 			}
 								
 			if(unmuteTime <= 0) {
-				sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/tempmute <playername> <time> <reason> " + ChatColor.RED + "to tempmute player");
+				sender.sendMessage(ChatColor.RED + "That is an invalid time argument");
 				return true;
 			}
 			

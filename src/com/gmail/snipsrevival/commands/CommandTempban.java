@@ -90,7 +90,7 @@ public class CommandTempban implements CommandExecutor {
 				}		
 			}							
 			if(unbanTime <= 0) {
-				sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/tempban <playername> <time> <reason> " + ChatColor.RED + "to tempban player");
+				sender.sendMessage(ChatColor.RED + "That is an invalid time argument");
 				return true;
 			}
 			

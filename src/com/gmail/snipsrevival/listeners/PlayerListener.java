@@ -54,20 +54,13 @@ public class PlayerListener implements Listener {
 		if(player.hasPermission("moderatornotes.banexempt")) userFile.set("BanExempt", true);
 		if(player.hasPermission("moderatornotes.muteexempt")) userFile.set("MuteExempt", true);
 		if(player.hasPermission("moderatornotes.kickexempt")) userFile.set("KickExempt", true);	
+		if(player.hasPermission("moderatornotes.staffmember")) userFile.set("staffmember", true);
 		if(!player.hasPermission("moderatornotes.banexempt")) userFile.set("BanExempt", false);
 		if(!player.hasPermission("moderatornotes.muteexempt")) userFile.set("MuteExempt", false);
 		if(!player.hasPermission("moderatornotes.kickexempt")) userFile.set("KickExempt", false);
-		
-		if(player.hasPermission("moderatornotes.staffmember")) {				
-			userFile.set("staffmember", true);
-			userFile.set("mail.new", mailListNew);
-			userFile.set("mail.read", mailListRead);
-		}
-		if(!player.hasPermission("moderatornotes.staffmember")) {							
-			userFile.set("staffmember", false);
-			userFile.set("mail.new", mailListNew);
-			userFile.set("mail.read", mailListRead);
-		}
+		if(player.hasPermission("moderatornotes.staffmember")) userFile.set("staffmember", false);
+		userFile.set("mail.new", mailListNew);
+		userFile.set("mail.read", mailListRead);
 		common.saveYamlFile(userFile, file);
 		
 		if(player.hasPermission("moderatornotes.mail.read")) {
@@ -105,19 +98,13 @@ public class PlayerListener implements Listener {
 		if(player.hasPermission("moderatornotes.banexempt")) userFile.set("BanExempt", true);
 		if(player.hasPermission("moderatornotes.muteexempt")) userFile.set("MuteExempt", true);
 		if(player.hasPermission("moderatornotes.kickexempt")) userFile.set("KickExempt", true);	
+		if(player.hasPermission("moderatornotes.staffmember")) userFile.set("staffmember", true);
 		if(!player.hasPermission("moderatornotes.banexempt")) userFile.set("BanExempt", false);
 		if(!player.hasPermission("moderatornotes.muteexempt")) userFile.set("MuteExempt", false);
 		if(!player.hasPermission("moderatornotes.kickexempt")) userFile.set("KickExempt", false);
-		if(player.hasPermission("moderatornotes.staffmember")) {				
-			userFile.set("staffmember", true);
-			userFile.set("mail.new", mailListNew);
-			userFile.set("mail.read", mailListRead);
-		}
-		if(!player.hasPermission("moderatornotes.staffmember")) {							
-			userFile.set("staffmember", false);
-			userFile.set("mail.new", mailListNew);
-			userFile.set("mail.read", mailListRead);
-		}
+		if(player.hasPermission("moderatornotes.staffmember")) userFile.set("staffmember", false);
+		userFile.set("mail.new", mailListNew);
+		userFile.set("mail.read", mailListRead);
 		common.saveYamlFile(userFile, file);
 	}
 	

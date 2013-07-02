@@ -190,12 +190,6 @@ public class CommonUtilities {
 		return -1;
 	}
 	
-	public void appendYamlList(YamlConfiguration file, String pathToList, String stringToAppend) {
-		ArrayList<String> list = (ArrayList<String>) file.getStringList(pathToList);
-		list.add(stringToAppend);
-		file.set(pathToList, list);
-	}
-	
 	/**
 	 * Creates a new file if it does not already exist
 	 * 

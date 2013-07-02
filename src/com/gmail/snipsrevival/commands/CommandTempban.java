@@ -61,7 +61,7 @@ public class CommandTempban implements CommandExecutor {
 				sender.sendMessage(ChatColor.RED + targetPlayer.getName() + " is exempt from being banned");
 				return true;
 			}
-			if(targetPlayer.isBanned() || userFile.get("permaban") == null) {
+			if(targetPlayer.isBanned() || userFile.get("permaban") != null) {
 				sender.sendMessage(ChatColor.RED + targetPlayer.getName() + " is already permanently banned");
 				return true;
 			}

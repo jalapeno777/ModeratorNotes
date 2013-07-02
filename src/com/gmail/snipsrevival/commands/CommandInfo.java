@@ -25,7 +25,10 @@ public class CommandInfo implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {	
 		if(cmd.getName().equalsIgnoreCase("info")) {
-			if(sender.hasPermission("moderatornotes.info")) {
+			if(!sender.hasPermission("moderatornotes.info")) {
+				sender.sendMessage(ChatColor.RED + "You don't have permission to use that command");
+			}
+			else {
 				Set<String> topicSet;
 				if(sender.hasPermission("moderatornotes.staffmember")) {
 					topicSet = plugin.getConfig().getConfigurationSection("StaffInfo").getKeys(false);
@@ -90,9 +93,6 @@ public class CommandInfo implements CommandExecutor {
 					sender.sendMessage(ChatColor.RED + "Too many arguments!");
 					sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/info <topic> [page #] " + ChatColor.RED + "for more information");
 				}
-			}
-			else {
-				sender.sendMessage(ChatColor.RED + "You don't have permission to use that command");
 			}
 		}
 		return true;

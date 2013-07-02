@@ -27,7 +27,10 @@ public class CommandUnban implements CommandExecutor {
 	@Override
 	public boolean onCommand(final CommandSender sender, Command cmd, String label, String[] args) {
 		if(cmd.getName().equalsIgnoreCase("unban")) {
-			if(sender.hasPermission("moderatornotes.tempban")) {
+			if(!sender.hasPermission("moderatornotes.tempban")) {
+				sender.sendMessage(ChatColor.RED + "You don't have permission to use that command");
+			}
+			else {
 				if(args.length < 2) {
 					sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/unban <playername> <reason> " + ChatColor.RED + "to tempban player");
 				}
@@ -75,9 +78,6 @@ public class CommandUnban implements CommandExecutor {
 						common.saveYamlFile(userFile, file);
 					}
 				}
-			}
-			else {
-				sender.sendMessage(ChatColor.RED + "You don't have permission to use that command");
 			}
 		}
 		return true;

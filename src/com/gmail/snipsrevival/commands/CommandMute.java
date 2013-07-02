@@ -27,36 +27,29 @@ public class CommandMute implements CommandExecutor {
 	@Override
 	public boolean onCommand(final CommandSender sender, Command cmd, String label, String[] args) {
 		if(cmd.getName().equalsIgnoreCase("mute")) {
-			if(args.length < 2) {
-				if(sender.hasPermission("moderatornotes.mute")) {
+			if(!sender.hasPermission("moderatornotes.mute")) {
+				sender.sendMessage(ChatColor.RED + "You don't have permission to use that command");
+			}
+			else {
+				if(args.length < 2) {
 					sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/mute <playername> <reason> " + ChatColor.RED + "to mute player");
 				}
-				else {
-					sender.sendMessage(ChatColor.RED + "You don't have permission to use that command");
-				}
-			}
-			
-			else {
-				
-				StringBuilder strBuilder = new StringBuilder();			
-				String prefix = common.getPrefix();
-				prefix = prefix.replace("<playername>", sender.getName());
-				
-				if(common.nameContainsInvalidCharacter(args[0])) {
-					sender.sendMessage(ChatColor.RED + "That is an invalid playername");
-					return true;
-				}
-				
-				final OfflinePlayer targetPlayer;
-				if(Bukkit.getServer().getPlayer(args[0]) != null) targetPlayer = Bukkit.getServer().getPlayer(args[0]);
-				else targetPlayer = Bukkit.getServer().getOfflinePlayer(args[0]);
-				
-				if(!sender.hasPermission("moderatornotes.mute")) {
-					sender.sendMessage(ChatColor.RED + "You don't have permission to use that command");
-				}
 				
 				else {
-
+					
+					StringBuilder strBuilder = new StringBuilder();			
+					String prefix = common.getPrefix();
+					prefix = prefix.replace("<playername>", sender.getName());
+					
+					if(common.nameContainsInvalidCharacter(args[0])) {
+						sender.sendMessage(ChatColor.RED + "That is an invalid playername");
+						return true;
+					}
+					
+					final OfflinePlayer targetPlayer;
+					if(Bukkit.getServer().getPlayer(args[0]) != null) targetPlayer = Bukkit.getServer().getPlayer(args[0]);
+					else targetPlayer = Bukkit.getServer().getOfflinePlayer(args[0]);
+					
 					File file = new File(plugin.getDataFolder() + "/userdata/" + targetPlayer.getName().toLowerCase() + ".yml");
 					YamlConfiguration userFile = YamlConfiguration.loadConfiguration(file);
 					List<String> noteList = userFile.getStringList("notes");

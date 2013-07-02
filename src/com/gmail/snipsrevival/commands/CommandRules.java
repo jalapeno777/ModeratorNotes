@@ -23,7 +23,10 @@ public class CommandRules implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if(cmd.getName().equalsIgnoreCase("rules")) {
-			if(sender.hasPermission("moderatornotes.rules")) {
+			if(!sender.hasPermission("moderatornotes.rules")) {
+				sender.sendMessage(ChatColor.RED + "You don't have permission to use that command");
+			}
+			else {
 				if(args.length > 1) {
 					sender.sendMessage(ChatColor.RED + "Too many arguments!");
 					sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/rules [page #] " + ChatColor.RED + "to show the rules");
@@ -59,9 +62,6 @@ public class CommandRules implements CommandExecutor {
 						sender.sendMessage(ChatColor.RED + "There are only " + totalPages + " pages of rules");
 					}
 				}
-			}
-			else {
-				sender.sendMessage(ChatColor.RED + "You don't have permission to use that command");
 			}
 		}
 		return true;

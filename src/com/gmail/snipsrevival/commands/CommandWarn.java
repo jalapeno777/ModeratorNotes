@@ -27,12 +27,14 @@ public class CommandWarn implements CommandExecutor {
 	@Override
 	public boolean onCommand(final CommandSender sender, Command cmd, String label, String[] args) {
 		if(cmd.getName().equalsIgnoreCase("warn")) {
-			if(sender.hasPermission("moderatornotes.warn")) {
+			if(!sender.hasPermission("moderatornotes.warn")) {
+				sender.sendMessage(ChatColor.RED + "You don't have permission to use that command");
+			}
+			else {
 				if(args.length < 2) {
 					sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/warn <playername> <reason> " + ChatColor.RED + "to warn player");
 				}
 
-			
 				else {
 					
 					StringBuilder strBuilder = new StringBuilder();			
@@ -72,9 +74,6 @@ public class CommandWarn implements CommandExecutor {
 					userFile.set("mail.new", mailListNew);
 					common.saveYamlFile(userFile, file);
 				}
-			}
-			else {
-				sender.sendMessage(ChatColor.RED + "You don't have permission to use that command");
 			}
 		}
 		return true;

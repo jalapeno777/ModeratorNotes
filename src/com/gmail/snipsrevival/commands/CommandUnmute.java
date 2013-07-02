@@ -27,7 +27,10 @@ public class CommandUnmute implements CommandExecutor {
 	@Override
 	public boolean onCommand(final CommandSender sender, Command cmd, String label, String[] args) {
 		if(cmd.getName().equalsIgnoreCase("unmute")) {
-			if(sender.hasPermission("moderatornotes.unmute")) {
+			if(!sender.hasPermission("moderatornotes.unmute")) {
+				sender.sendMessage(ChatColor.RED + "You don't have permission to use that command");
+			}
+			else {
 				if(args.length < 2) {
 					sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/unmute <playername> <reason> " + ChatColor.RED + "to unmute player");
 				}
@@ -74,9 +77,6 @@ public class CommandUnmute implements CommandExecutor {
 						common.saveYamlFile(userFile, file);
 					}
 				}
-			}
-			else {
-				sender.sendMessage(ChatColor.RED + "You don't have permission to use that command");
 			}
 		}
 		return true;

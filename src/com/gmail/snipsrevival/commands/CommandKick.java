@@ -27,7 +27,10 @@ public class CommandKick implements CommandExecutor {
 	@Override
 	public boolean onCommand(final CommandSender sender, Command cmd, String label, String[] args) {
 		if(cmd.getName().equalsIgnoreCase("kick")) {
-			if(sender.hasPermission("moderatornotes.kick")) {
+			if(!sender.hasPermission("moderatornotes.kick")) {
+				sender.sendMessage(ChatColor.RED + "You don't have permission to use that command");
+			}
+			else {
 				if(args.length < 2) {
 					sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/kick <playername> <reason> " + ChatColor.RED + "to kick player");
 				}
@@ -72,9 +75,6 @@ public class CommandKick implements CommandExecutor {
 						sender.sendMessage(ChatColor.RED + args[0] + " is not online");
 					}
 				}
-			}
-			else {
-				sender.sendMessage(ChatColor.RED + "You don't have permission to use that command");
 			}
 		}
 		return true;

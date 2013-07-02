@@ -27,7 +27,10 @@ public class CommandBan implements CommandExecutor {
 	@Override
 	public boolean onCommand(final CommandSender sender, Command cmd, String label, String[] args) {	
 		if(cmd.getName().equalsIgnoreCase("ban")) {			
-			if(sender.hasPermission("moderatornotes.ban")) {
+			if(!sender.hasPermission("moderatornotes.ban")) {
+				sender.sendMessage(ChatColor.RED + "You don't have permission to use that command");
+			}
+			else {
 				if(args.length < 2) {
 					sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/ban <playername> <reason> " + ChatColor.RED + "to ban player");
 				}
@@ -81,9 +84,6 @@ public class CommandBan implements CommandExecutor {
 						sender.sendMessage(ChatColor.RED + targetPlayer.getName() + " is exempt from being banned");
 					}
 				}
-			}
-			else {
-				sender.sendMessage(ChatColor.RED + "You don't have permission to use that command");
 			}
 		}
 		return true;

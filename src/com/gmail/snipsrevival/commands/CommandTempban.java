@@ -31,7 +31,10 @@ public class CommandTempban implements CommandExecutor {
 	@Override
 	public boolean onCommand(final CommandSender sender, Command cmd, String label, String[] args) {		
 		if(cmd.getName().equalsIgnoreCase("tempban")) {
-			if(sender.hasPermission("moderatornotes.tempban")) {
+			if(!sender.hasPermission("moderatornotes.tempban")) {
+				sender.sendMessage(ChatColor.RED + "You don't have permission to use that command");
+			}
+			else {
 				if(args.length < 3) {
 					sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/tempban <playername> <time> <reason> " + ChatColor.RED + "to tempban player");
 				}
@@ -120,9 +123,6 @@ public class CommandTempban implements CommandExecutor {
 						sender.sendMessage(ChatColor.RED + targetPlayer.getName() + " is exempt from being banned");
 					}	
 				}
-			}
-			else {
-				sender.sendMessage(ChatColor.RED + "You don't have permission to use that command");
 			}
 		}
 		return true;

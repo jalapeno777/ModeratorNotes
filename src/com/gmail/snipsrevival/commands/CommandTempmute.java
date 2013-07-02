@@ -32,6 +32,9 @@ public class CommandTempmute implements CommandExecutor {
 	public boolean onCommand(final CommandSender sender, Command cmd, String label, String[] args) {
 		if(cmd.getName().equalsIgnoreCase("tempmute")) {
 			if(sender.hasPermission("moderatornotes.tempmute")) {
+				sender.sendMessage(ChatColor.RED + "You don't have permission to use that command");
+			}
+			else {
 				if(args.length < 3) {
 					sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/tempmute <playername> <time> <reason> " + ChatColor.RED + "to tempmute player");
 				}
@@ -121,9 +124,6 @@ public class CommandTempmute implements CommandExecutor {
 						sender.sendMessage(ChatColor.RED + targetPlayer.getName() + " is exempt from being muted");
 					}
 				}
-			}
-			else {
-				sender.sendMessage(ChatColor.RED + "You don't have permission to use that command");
 			}
 		}
 		return true;

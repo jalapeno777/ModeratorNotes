@@ -14,6 +14,7 @@ import org.bukkit.entity.Player;
 
 import com.gmail.snipsrevival.CommonUtilities;
 import com.gmail.snipsrevival.ModeratorNotes;
+import com.gmail.snipsrevival.Prefix;
 
 public class CommandMail implements CommandExecutor {
 	
@@ -245,8 +246,7 @@ public class CommandMail implements CommandExecutor {
 		
 		else {
 			StringBuilder strBuilder = new StringBuilder();			
-			String prefix = common.getPrefix();
-			prefix = prefix.replace("<playername>", sender.getName());
+			String prefix = new Prefix(plugin).getPrefix(sender);
 			
 			File dir = new File(plugin.getDataFolder() + "/userdata/");
 			File[] children = dir.listFiles();
@@ -288,8 +288,7 @@ public class CommandMail implements CommandExecutor {
 	public boolean sendAllMail(CommandSender sender, String[] args) {
 		
 		StringBuilder strBuilder = new StringBuilder();			
-		String prefix = common.getPrefix();
-		prefix = prefix.replace("<playername>", sender.getName());
+		String prefix = new Prefix(plugin).getPrefix(sender);
 		
 		File dir = new File(plugin.getDataFolder() + "/userdata/");
 		File[] children = dir.listFiles();
@@ -324,8 +323,7 @@ public class CommandMail implements CommandExecutor {
 	public boolean sendStaffMail(CommandSender sender, String[] args) {
 		
 		StringBuilder strBuilder = new StringBuilder();			
-		String prefix = common.getPrefix();
-		prefix = prefix.replace("<playername>", sender.getName());
+		String prefix = new Prefix(plugin).getPrefix(sender);
 		
 		File dir = new File(plugin.getDataFolder() + "/userdata/");
 		File[] children = dir.listFiles();

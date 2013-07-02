@@ -13,6 +13,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import com.gmail.snipsrevival.CommonUtilities;
 import com.gmail.snipsrevival.ModeratorNotes;
+import com.gmail.snipsrevival.Prefix;
 
 public class CommandUnmute implements CommandExecutor {
 	
@@ -38,8 +39,7 @@ public class CommandUnmute implements CommandExecutor {
 				else {
 					
 					StringBuilder strBuilder = new StringBuilder();			
-					String prefix = common.getPrefix();
-					prefix = prefix.replace("<playername>", sender.getName());
+					String prefix = new Prefix(plugin).getPrefix(sender);
 					
 					if(common.nameContainsInvalidCharacter(args[0])) {
 						sender.sendMessage(ChatColor.RED + "That is an invalid playername");

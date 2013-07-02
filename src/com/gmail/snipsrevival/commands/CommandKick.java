@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 
 import com.gmail.snipsrevival.CommonUtilities;
 import com.gmail.snipsrevival.ModeratorNotes;
+import com.gmail.snipsrevival.Prefix;
 
 public class CommandKick implements CommandExecutor {
 	
@@ -38,8 +39,7 @@ public class CommandKick implements CommandExecutor {
 				else {
 					
 					StringBuilder strBuilder = new StringBuilder();			
-					String prefix = common.getPrefix();
-					prefix = prefix.replace("<playername>", sender.getName());
+					String prefix = new Prefix(plugin).getPrefix(sender);
 					
 					final Player targetPlayer = Bukkit.getServer().getPlayer(args[0]);
 					

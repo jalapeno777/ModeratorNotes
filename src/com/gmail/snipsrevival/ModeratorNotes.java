@@ -17,7 +17,6 @@ import com.gmail.snipsrevival.listeners.*;
 public class ModeratorNotes extends JavaPlugin implements Listener {
 	
 	public static ModeratorNotes plugin;
-	public static boolean chatEnabled;
 	
 	CommonUtilities common = new CommonUtilities();	
 	
@@ -33,21 +32,21 @@ public class ModeratorNotes extends JavaPlugin implements Listener {
  
 	public static void unRegisterBukkitCommand(PluginCommand cmd) {
 		try {
-	        Object result = getPrivateField(Bukkit.getServer().getPluginManager(), "commandMap");
-	        SimpleCommandMap commandMap = (SimpleCommandMap) result;
-	        Object map = getPrivateField(commandMap, "knownCommands");
-	        @SuppressWarnings("unchecked")
-	        HashMap<String, Command> knownCommands = (HashMap<String, Command>) map;
-	        knownCommands.remove(cmd.getName());
-	        for (String alias : cmd.getAliases()){
-	           if(knownCommands.containsKey(alias) && knownCommands.get(alias).toString().contains(Bukkit.getName())){
-	                knownCommands.remove(alias);
-	            }
-	        }
-        }
-    	catch (Exception e) {
-    		e.printStackTrace();
-    	}
+			Object result = getPrivateField(Bukkit.getServer().getPluginManager(), "commandMap");
+			SimpleCommandMap commandMap = (SimpleCommandMap) result;
+			Object map = getPrivateField(commandMap, "knownCommands");
+			@SuppressWarnings("unchecked")
+			HashMap<String, Command> knownCommands = (HashMap<String, Command>) map;
+			knownCommands.remove(cmd.getName());
+			for (String alias : cmd.getAliases()) {
+				if(knownCommands.containsKey(alias) && knownCommands.get(alias).toString().contains(Bukkit.getName())) {
+					knownCommands.remove(alias);
+				}
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 		
 	@Override

@@ -40,5 +40,4 @@ public class Prefix {
 		prefix = prefix.replace("<playername>", sender.getName());
 		return prefix;
 	}
-
 }

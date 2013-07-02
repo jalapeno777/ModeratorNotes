@@ -58,7 +58,7 @@ public class PlayerListener implements Listener {
 		if(!player.hasPermission("moderatornotes.banexempt")) userFile.set("BanExempt", false);
 		if(!player.hasPermission("moderatornotes.muteexempt")) userFile.set("MuteExempt", false);
 		if(!player.hasPermission("moderatornotes.kickexempt")) userFile.set("KickExempt", false);
-		if(player.hasPermission("moderatornotes.staffmember")) userFile.set("staffmember", false);
+		if(!player.hasPermission("moderatornotes.staffmember")) userFile.set("staffmember", false);
 		userFile.set("mail.new", mailListNew);
 		userFile.set("mail.read", mailListRead);
 		common.saveYamlFile(userFile, file);
@@ -102,7 +102,7 @@ public class PlayerListener implements Listener {
 		if(!player.hasPermission("moderatornotes.banexempt")) userFile.set("BanExempt", false);
 		if(!player.hasPermission("moderatornotes.muteexempt")) userFile.set("MuteExempt", false);
 		if(!player.hasPermission("moderatornotes.kickexempt")) userFile.set("KickExempt", false);
-		if(player.hasPermission("moderatornotes.staffmember")) userFile.set("staffmember", false);
+		if(!player.hasPermission("moderatornotes.staffmember")) userFile.set("staffmember", false);
 		userFile.set("mail.new", mailListNew);
 		userFile.set("mail.read", mailListRead);
 		common.saveYamlFile(userFile, file);

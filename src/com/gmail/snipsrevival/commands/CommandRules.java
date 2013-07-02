@@ -25,43 +25,41 @@ public class CommandRules implements CommandExecutor {
 		if(cmd.getName().equalsIgnoreCase("rules")) {
 			if(!sender.hasPermission("moderatornotes.rules")) {
 				sender.sendMessage(ChatColor.RED + "You don't have permission to use that command");
+				return true;
 			}
-			else {
-				if(args.length > 1) {
-					sender.sendMessage(ChatColor.RED + "Too many arguments!");
-					sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/rules [page #] " + ChatColor.RED + "to show the rules");
+			if(args.length > 1) {
+				sender.sendMessage(ChatColor.RED + "Too many arguments!");
+				sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/rules [page #] " + ChatColor.RED + "to show the rules");
+				return true;
+			}
+			List<String> inputList = plugin.getConfig().getStringList("Rules");
+			double configNumber = plugin.getConfig().getDouble("MessagesPerPage.Rules");
+			List<String> outputList;
+			int totalPages = common.getTotalPages(inputList, configNumber);
+			int page;
+			try{
+				if(args.length == 0) {
+					outputList = common.getListPage(inputList, "1", configNumber);
+					page = 1;
 				}
 				else {
-					List<String> inputList = plugin.getConfig().getStringList("Rules");
-					double configNumber = plugin.getConfig().getDouble("MessagesPerPage.Rules");
-					List<String> outputList;
-					int totalPages = common.getTotalPages(inputList, configNumber);
-					int page;
-					try{
-						if(args.length == 0) {
-							outputList = common.getListPage(inputList, "1", configNumber);
-							page = 1;
-						}
-						else {
-							outputList = common.getListPage(inputList, args[0], configNumber);
-							page = Integer.parseInt(args[0]);
-						}
-						
-						sender.sendMessage(ChatColor.GOLD + "Rule Page " + page + " of " + totalPages);
-						for(String output : outputList) {
-							sender.sendMessage(output);
-						}
-					}
-					catch (IllegalArgumentException e) { //ie args[0] is not a natural Number (1, 2, 3 etc)
-						sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/rules [page #] " + ChatColor.RED + "to show the rules");
-					}
-					catch (IllegalStateException e) { //ie the original list is empty
-						sender.sendMessage(ChatColor.RED + "No rules have been listed");
-					}
-					catch (IndexOutOfBoundsException e) { //ie args[0] is higher than the amount of pages
-						sender.sendMessage(ChatColor.RED + "There are only " + totalPages + " pages of rules");
-					}
+					outputList = common.getListPage(inputList, args[0], configNumber);
+					page = Integer.parseInt(args[0]);
 				}
+				
+				sender.sendMessage(ChatColor.GOLD + "Rule Page " + page + " of " + totalPages);
+				for(String output : outputList) {
+					sender.sendMessage(output);
+				}
+			}
+			catch (IllegalArgumentException e) { //ie args[0] is not a natural Number (1, 2, 3 etc)
+				sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/rules [page #] " + ChatColor.RED + "to show the rules");
+			}
+			catch (IllegalStateException e) { //ie the original list is empty
+				sender.sendMessage(ChatColor.RED + "No rules have been listed");
+			}
+			catch (IndexOutOfBoundsException e) { //ie args[0] is higher than the amount of pages
+				sender.sendMessage(ChatColor.RED + "There are only " + totalPages + " pages of rules");
 			}
 		}
 		return true;

@@ -30,51 +30,46 @@ public class CommandKick implements CommandExecutor {
 		if(cmd.getName().equalsIgnoreCase("kick")) {
 			if(!sender.hasPermission("moderatornotes.kick")) {
 				sender.sendMessage(ChatColor.RED + "You don't have permission to use that command");
+				return true;
 			}
-			else {
-				if(args.length < 2) {
-					sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/kick <playername> <reason> " + ChatColor.RED + "to kick player");
-				}
-			
-				else {
-					
-					StringBuilder strBuilder = new StringBuilder();			
-					String prefix = new Prefix(plugin).getPrefix(sender);
-					
-					final Player targetPlayer = Bukkit.getServer().getPlayer(args[0]);
-					
-					if(targetPlayer == null) {
-						sender.sendMessage(ChatColor.RED + args[0] + " is not online");
-					}
-					else {
-						
-						File file = new File(plugin.getDataFolder() + "/userdata/" + targetPlayer.getName().toLowerCase() + ".yml");
-						YamlConfiguration userFile = YamlConfiguration.loadConfiguration(file);
-						List<String> noteList = userFile.getStringList("notes");
-						
-						if(userFile.getBoolean("KickExempt") == true) {
-							sender.sendMessage(ChatColor.RED + targetPlayer.getName() + " is exempt from being kicked");
-						}
-						else {
-							common.createNewFile(file);
-							for(int arg = 1; arg < args.length; arg = arg+1) {
-								strBuilder.append(args[arg] + " ");
-							}
-							String message = strBuilder.toString().trim();
+			if(args.length < 2) {
+				sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/kick <playername> <reason> " + ChatColor.RED + "to kick player");
+				return true;
+			}
 							
-							sender.sendMessage(ChatColor.GREEN + targetPlayer.getName() + " has been kicked for this reason: " + message);
-							targetPlayer.kickPlayer("You were kicked for this reason: " + message);
-	
-							if(plugin.getConfig().getBoolean("AutoRecordKicks") == true) {
-								noteList.add(prefix + "has been kicked for this reason: " + message);
-								common.addStringStaffList(prefix + targetPlayer.getName() + " has been kicked for this reason: " + message);
-								userFile.set("notes", noteList);
-							}
-							common.saveYamlFile(userFile, file);
-						}
-					}
-				}
+			StringBuilder strBuilder = new StringBuilder();			
+			String prefix = new Prefix(plugin).getPrefix(sender);
+			
+			final Player targetPlayer = Bukkit.getServer().getPlayer(args[0]);
+			
+			if(targetPlayer == null) {
+				sender.sendMessage(ChatColor.RED + args[0] + " is not online");
+				return true;
 			}
+			
+			File file = new File(plugin.getDataFolder() + "/userdata/" + targetPlayer.getName().toLowerCase() + ".yml");
+			YamlConfiguration userFile = YamlConfiguration.loadConfiguration(file);
+			List<String> noteList = userFile.getStringList("notes");
+			
+			if(userFile.getBoolean("KickExempt") == true) {
+				sender.sendMessage(ChatColor.RED + targetPlayer.getName() + " is exempt from being kicked");
+				return true;
+			}
+			common.createNewFile(file);
+			for(int arg = 1; arg < args.length; arg = arg+1) {
+				strBuilder.append(args[arg] + " ");
+			}
+			String message = strBuilder.toString().trim();
+			
+			sender.sendMessage(ChatColor.GREEN + targetPlayer.getName() + " has been kicked for this reason: " + message);
+			targetPlayer.kickPlayer("You were kicked for this reason: " + message);
+
+			if(plugin.getConfig().getBoolean("AutoRecordKicks") == true) {
+				noteList.add(prefix + "has been kicked for this reason: " + message);
+				common.addStringStaffList(prefix + targetPlayer.getName() + " has been kicked for this reason: " + message);
+				userFile.set("notes", noteList);
+			}
+			common.saveYamlFile(userFile, file);
 		}
 		return true;
 	}

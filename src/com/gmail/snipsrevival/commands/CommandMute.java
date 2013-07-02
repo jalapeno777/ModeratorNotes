@@ -30,59 +30,54 @@ public class CommandMute implements CommandExecutor {
 		if(cmd.getName().equalsIgnoreCase("mute")) {
 			if(!sender.hasPermission("moderatornotes.mute")) {
 				sender.sendMessage(ChatColor.RED + "You don't have permission to use that command");
+				return true;
 			}
-			else {
-				if(args.length < 2) {
-					sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/mute <playername> <reason> " + ChatColor.RED + "to mute player");
-				}
-				
-				else {
-					
-					StringBuilder strBuilder = new StringBuilder();			
-					String prefix = new Prefix(plugin).getPrefix(sender);
-					
-					if(common.nameContainsInvalidCharacter(args[0])) {
-						sender.sendMessage(ChatColor.RED + "That is an invalid playername");
-						return true;
-					}
-					
-					final OfflinePlayer targetPlayer;
-					if(Bukkit.getServer().getPlayer(args[0]) != null) targetPlayer = Bukkit.getServer().getPlayer(args[0]);
-					else targetPlayer = Bukkit.getServer().getOfflinePlayer(args[0]);
-					
-					File file = new File(plugin.getDataFolder() + "/userdata/" + targetPlayer.getName().toLowerCase() + ".yml");
-					YamlConfiguration userFile = YamlConfiguration.loadConfiguration(file);
-					List<String> noteList = userFile.getStringList("notes");
-					
-					if(userFile.getBoolean("MuteExempt") == true) {
-						sender.sendMessage(ChatColor.RED + targetPlayer.getName() + " is exempt from being muted");
-					}
-					else {
+			if(args.length < 2) {
+				sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/mute <playername> <reason> " + ChatColor.RED + "to mute player");
+				return true;
+			}
+								
+			StringBuilder strBuilder = new StringBuilder();			
+			String prefix = new Prefix(plugin).getPrefix(sender);
+			
+			if(common.nameContainsInvalidCharacter(args[0])) {
+				sender.sendMessage(ChatColor.RED + "That is an invalid playername");
+				return true;
+			}
+			
+			final OfflinePlayer targetPlayer;
+			if(Bukkit.getServer().getPlayer(args[0]) != null) targetPlayer = Bukkit.getServer().getPlayer(args[0]);
+			else targetPlayer = Bukkit.getServer().getOfflinePlayer(args[0]);
+			
+			File file = new File(plugin.getDataFolder() + "/userdata/" + targetPlayer.getName().toLowerCase() + ".yml");
+			YamlConfiguration userFile = YamlConfiguration.loadConfiguration(file);
+			List<String> noteList = userFile.getStringList("notes");
+			
+			if(userFile.getBoolean("MuteExempt") == true) {
+				sender.sendMessage(ChatColor.RED + targetPlayer.getName() + " is exempt from being muted");
+				return true;
+			}
 
-						if(userFile.getBoolean("permamute.muted") == true) {
-							sender.sendMessage(ChatColor.RED + targetPlayer.getName() + " is already muted");
-						}
-						else {
-							common.createNewFile(file);
-							userFile.set("permamute.muted", true);	
-							for(int arg = 1; arg < args.length; arg = arg+1) {
-								strBuilder.append(args[arg] + " ");
-							}
-							String message = strBuilder.toString().trim();
-							
-							userFile.set("permamute.reason", "You are muted for this reason: " + message);
-							sender.sendMessage(ChatColor.GREEN + targetPlayer.getName() + " has been muted for this reason: " + message);
-							
-							if(plugin.getConfig().getBoolean("AutoRecordMutes") == true) {
-								noteList.add(prefix + "has been muted for this reason: " + message);
-								common.addStringStaffList(prefix + targetPlayer.getName() + " has been muted for this reason: " + message);
-								userFile.set("notes", noteList);
-							}
-							common.saveYamlFile(userFile, file);
-						}
-					}
-				}
+			if(userFile.getBoolean("permamute.muted") == true) {
+				sender.sendMessage(ChatColor.RED + targetPlayer.getName() + " is already muted");
+				return true;
 			}
+			common.createNewFile(file);
+			userFile.set("permamute.muted", true);	
+			for(int arg = 1; arg < args.length; arg = arg+1) {
+				strBuilder.append(args[arg] + " ");
+			}
+			String message = strBuilder.toString().trim();
+			
+			userFile.set("permamute.reason", "You are muted for this reason: " + message);
+			sender.sendMessage(ChatColor.GREEN + targetPlayer.getName() + " has been muted for this reason: " + message);
+			
+			if(plugin.getConfig().getBoolean("AutoRecordMutes") == true) {
+				noteList.add(prefix + "has been muted for this reason: " + message);
+				common.addStringStaffList(prefix + targetPlayer.getName() + " has been muted for this reason: " + message);
+				userFile.set("notes", noteList);
+			}
+			common.saveYamlFile(userFile, file);
 		}
 		return true;
 	}

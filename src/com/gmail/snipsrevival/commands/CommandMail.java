@@ -218,7 +218,7 @@ public class CommandMail implements CommandExecutor {
 		mailListRead.clear();
 		userFile.set("mail.read", mailListRead);
 		common.saveYamlFile(userFile, file);
-		sender.sendMessage(ChatColor.GREEN + "All mail has been removed from your mail");
+		sender.sendMessage(ChatColor.GREEN + "All mail has been removed from your mailbox");
 		return true;
 	}
 	

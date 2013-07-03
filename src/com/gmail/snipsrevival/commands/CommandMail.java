@@ -92,7 +92,7 @@ public class CommandMail implements CommandExecutor {
 			return true;
 		}
 		
-		File file = new File(plugin.getDataFolder() + "/userdata/" + sender.getName() + ".yml");
+		File file = new File(plugin.getDataFolder() + "/userdata/" + sender.getName().toLowerCase() + ".yml");
 		YamlConfiguration userFile = YamlConfiguration.loadConfiguration(file);
 		List<String> mailListNew = userFile.getStringList("mail.new");
 		List<String> mailListRead = userFile.getStringList("mail.read");
@@ -161,7 +161,7 @@ public class CommandMail implements CommandExecutor {
 			return true;
 		}
 		
-		File file = new File(plugin.getDataFolder() + "/userdata/" + sender.getName() + ".yml");
+		File file = new File(plugin.getDataFolder() + "/userdata/" + sender.getName().toLowerCase() + ".yml");
 		YamlConfiguration userFile = YamlConfiguration.loadConfiguration(file);
 		List<String> mailListNew = userFile.getStringList("mail.new");
 		List<String> mailListRead = userFile.getStringList("mail.read");
@@ -206,7 +206,7 @@ public class CommandMail implements CommandExecutor {
 			return true;
 		}
 		
-		File file = new File(plugin.getDataFolder() + "/userdata/" + sender.getName() + ".yml");
+		File file = new File(plugin.getDataFolder() + "/userdata/" + sender.getName().toLowerCase() + ".yml");
 		YamlConfiguration userFile = YamlConfiguration.loadConfiguration(file);
 		List<String> mailListNew = userFile.getStringList("mail.new");
 		List<String> mailListRead = userFile.getStringList("mail.read");

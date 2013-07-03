@@ -81,10 +81,6 @@ public class CommandNote implements CommandExecutor {
 			sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/note add <playername> <message> " + ChatColor.RED + "to add note");
 			return true;
 		}
-				
-		StringBuilder strBuilder = new StringBuilder();			
-		String prefix = new Prefix(plugin).getPrefix(sender);
-		
 		if(common.nameContainsInvalidCharacter(args[1])) {
 			sender.sendMessage(ChatColor.RED + "That is an invalid playername");
 			return true;
@@ -94,8 +90,11 @@ public class CommandNote implements CommandExecutor {
 		if(Bukkit.getServer().getPlayer(args[1]) != null) targetPlayer = Bukkit.getServer().getPlayer(args[1]);
 		else targetPlayer = Bukkit.getServer().getOfflinePlayer(args[1]);
 		
-		for(int arg = 2; arg < args.length; arg = arg+1) {
-			strBuilder.append(args[arg] + " ");
+		StringBuilder strBuilder = new StringBuilder();			
+		String prefix = new Prefix(plugin).getPrefix(sender);
+		
+		for(int i = 2; i < args.length; i++) {
+			strBuilder.append(args[i] + " ");
 		}
 		String message = strBuilder.toString().trim();
 		
@@ -112,16 +111,16 @@ public class CommandNote implements CommandExecutor {
 	}
 	
 	public boolean listPlayers(CommandSender sender, String[] args) { 
-		
-		File dir = new File(plugin.getDataFolder() + "/userdata/");
-		File[] children = dir.listFiles();
-		List<String> inputList = new ArrayList<String>();
-		
 		if(args.length > 2) {
 			sender.sendMessage(ChatColor.RED + "Too many arguments!");
 			sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/note list [page #] " + ChatColor.RED + "to show players with notes");
 			return true;
 		}
+		
+		File dir = new File(plugin.getDataFolder() + "/userdata/");
+		File[] children = dir.listFiles();
+		List<String> inputList = new ArrayList<String>();
+		
 		if(children != null) {
 			for(File f : children) {
 				File childFile = new File(plugin.getDataFolder() + "/userdata/" + f.getName());
@@ -230,8 +229,7 @@ public class CommandNote implements CommandExecutor {
 		return true;
 	}
 	
-	public boolean removeSingleNote(CommandSender sender, String[] args) { 
-		
+	public boolean removeSingleNote(CommandSender sender, String[] args) { 	
 		if(args.length < 3) {
 			sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/note remove <playername> <note #> " + ChatColor.RED + "to remove note");
 			return true;
@@ -240,13 +238,11 @@ public class CommandNote implements CommandExecutor {
 			sender.sendMessage(ChatColor.RED + "Too many arguments!");
 			sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/note remove <playername> <note #> " + ChatColor.RED + "to remove note");
 			return true;
-		}
-			
+		}	
 		if(common.nameContainsInvalidCharacter(args[1])) {
 			sender.sendMessage(ChatColor.RED + "That is an invalid playername");
 			return true;
-		}
-		
+		}	
 		if(!common.isInt(args[2])) {
 			sender.sendMessage(ChatColor.RED + "That is an invalid note number");
 			return true;
@@ -261,14 +257,12 @@ public class CommandNote implements CommandExecutor {
 		List<String> noteList = userFile.getStringList("notes");
 		int number = Integer.parseInt(args[2]);
 		
-		if(!file.exists() || noteList.isEmpty()) {
+		if(!file.exists() || noteList.isEmpty() || 
+				number > noteList.size() || number <= 0) {
 			sender.sendMessage(ChatColor.RED + "That note does not exist");
 			return true;
 		}
-		if(number > noteList.size() || number <= 0) {
-			sender.sendMessage(ChatColor.RED + "That note does not exist");
-			return true;
-		}
+
 		noteList.remove(number-1);
 		userFile.set("notes", noteList);
 		common.saveYamlFile(userFile, file);
@@ -291,8 +285,7 @@ public class CommandNote implements CommandExecutor {
 			sender.sendMessage(ChatColor.RED + "Too many arguments!");
 			sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/note removeall <playername> " + ChatColor.RED + "to remove all notes");
 			return true;
-		}
-					
+		}			
 		if(common.nameContainsInvalidCharacter(args[1])) {
 			sender.sendMessage(ChatColor.RED + "That is an invalid playername");
 			return true;

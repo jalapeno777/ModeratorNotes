@@ -188,7 +188,7 @@ public class CommonUtilities {
 	public void createNewDir(File dir) {
 		if(!dir.exists()) {
 			try {
-				dir.mkdirs();
+				dir.mkdir();
 			}
 			catch (Exception e) {
 				e.printStackTrace();

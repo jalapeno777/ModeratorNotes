@@ -39,11 +39,7 @@ public class CommandTempmute implements CommandExecutor {
 			if(args.length < 3) {
 				sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/tempmute <playername> <time> <reason> " + ChatColor.RED + "to tempmute player");
 				return true;
-			}
-			
-			StringBuilder strBuilder = new StringBuilder();			
-			String prefix = new Prefix(plugin).getPrefix(sender);
-			
+			}	
 			if(common.nameContainsInvalidCharacter(args[0])) {
 				sender.sendMessage(ChatColor.RED + "That is an invalid playername");
 				return true;
@@ -101,6 +97,9 @@ public class CommandTempmute implements CommandExecutor {
 			
 			Date unmuteDateUnformatted = new Date((long) (System.currentTimeMillis() + unmuteTime*1000));
 			String unmuteDate = new SimpleDateFormat("MMMM dd, yyyy hh:mm:ss a z").format(unmuteDateUnformatted);
+			
+			StringBuilder strBuilder = new StringBuilder();			
+			String prefix = new Prefix(plugin).getPrefix(sender);
 			
 			for(int x = 2; x < args.length; x++) {
 				strBuilder.append(args[x] + " ");

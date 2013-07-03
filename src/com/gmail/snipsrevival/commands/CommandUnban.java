@@ -36,10 +36,6 @@ public class CommandUnban implements CommandExecutor {
 				sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/unban <playername> <reason> " + ChatColor.RED + "to tempban player");
 				return true;
 			}
-								
-			StringBuilder strBuilder = new StringBuilder();			
-			String prefix = new Prefix(plugin).getPrefix(sender);
-			
 			if(common.nameContainsInvalidCharacter(args[0])) {
 				sender.sendMessage(ChatColor.RED + "That is an invalid playername");
 				return true;
@@ -52,6 +48,10 @@ public class CommandUnban implements CommandExecutor {
 			List<String> noteList = userFile.getStringList("notes");
 			
 			common.createNewFile(file);
+			
+			StringBuilder strBuilder = new StringBuilder();			
+			String prefix = new Prefix(plugin).getPrefix(sender);
+			
 			for(int arg = 1; arg < args.length; arg++) {
 				strBuilder.append(args[arg] + " ");
 			}

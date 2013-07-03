@@ -36,10 +36,6 @@ public class CommandMute implements CommandExecutor {
 				sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/mute <playername> <reason> " + ChatColor.RED + "to mute player");
 				return true;
 			}
-								
-			StringBuilder strBuilder = new StringBuilder();			
-			String prefix = new Prefix(plugin).getPrefix(sender);
-			
 			if(common.nameContainsInvalidCharacter(args[0])) {
 				sender.sendMessage(ChatColor.RED + "That is an invalid playername");
 				return true;
@@ -62,8 +58,13 @@ public class CommandMute implements CommandExecutor {
 				sender.sendMessage(ChatColor.RED + targetPlayer.getName() + " is already muted");
 				return true;
 			}
+			
 			common.createNewFile(file);
-			userFile.set("permamute.muted", true);	
+			userFile.set("permamute.muted", true);
+			
+			StringBuilder strBuilder = new StringBuilder();			
+			String prefix = new Prefix(plugin).getPrefix(sender);
+			
 			for(int arg = 1; arg < args.length; arg = arg+1) {
 				strBuilder.append(args[arg] + " ");
 			}

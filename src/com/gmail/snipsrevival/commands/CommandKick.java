@@ -36,10 +36,7 @@ public class CommandKick implements CommandExecutor {
 				sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/kick <playername> <reason> " + ChatColor.RED + "to kick player");
 				return true;
 			}
-							
-			StringBuilder strBuilder = new StringBuilder();			
-			String prefix = new Prefix(plugin).getPrefix(sender);
-			
+						
 			final Player targetPlayer = Bukkit.getServer().getPlayer(args[0]);
 			
 			if(targetPlayer == null) {
@@ -55,7 +52,12 @@ public class CommandKick implements CommandExecutor {
 				sender.sendMessage(ChatColor.RED + targetPlayer.getName() + " is exempt from being kicked");
 				return true;
 			}
+			
 			common.createNewFile(file);
+			
+			StringBuilder strBuilder = new StringBuilder();			
+			String prefix = new Prefix(plugin).getPrefix(sender);
+			
 			for(int arg = 1; arg < args.length; arg = arg+1) {
 				strBuilder.append(args[arg] + " ");
 			}

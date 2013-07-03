@@ -40,10 +40,6 @@ public class CommandTempban implements CommandExecutor {
 				sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/tempban <playername> <time> <reason> " + ChatColor.RED + "to tempban player");
 				return true;
 			}
-			
-			StringBuilder strBuilder = new StringBuilder();			
-			String prefix = new Prefix(plugin).getPrefix(sender);
-			
 			if(common.nameContainsInvalidCharacter(args[0])) {
 				sender.sendMessage(ChatColor.RED + "That is an invalid playername");
 				return true;
@@ -96,6 +92,9 @@ public class CommandTempban implements CommandExecutor {
 			
 			Date unbanDateUnformatted = new Date((long) (System.currentTimeMillis() + unbanTime*1000));
 			String unbanDate = new SimpleDateFormat("MMMM dd, yyyy hh:mm:ss a z").format(unbanDateUnformatted);
+			
+			StringBuilder strBuilder = new StringBuilder();			
+			String prefix = new Prefix(plugin).getPrefix(sender);
 			
 			for(int x = 2; x < args.length; x++) {
 				strBuilder.append(args[x] + " ");

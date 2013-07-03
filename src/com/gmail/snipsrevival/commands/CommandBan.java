@@ -36,10 +36,6 @@ public class CommandBan implements CommandExecutor {
 				sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/ban <playername> <reason> " + ChatColor.RED + "to ban player");
 				return true;
 			}
-		
-			StringBuilder strBuilder = new StringBuilder();			
-			String prefix = new Prefix(plugin).getPrefix(sender);
-			
 			if(common.nameContainsInvalidCharacter(args[0])) {
 				sender.sendMessage(ChatColor.RED + "That is an invalid playername");
 				return true;
@@ -61,8 +57,13 @@ public class CommandBan implements CommandExecutor {
 				sender.sendMessage(ChatColor.RED + targetPlayer.getName() + " is already banned");
 				return true;
 			}
+			
 			common.createNewFile(file);
 			targetPlayer.setBanned(true);
+			
+			StringBuilder strBuilder = new StringBuilder();			
+			String prefix = new Prefix(plugin).getPrefix(sender);
+			
 			for(int arg = 1; arg < args.length; arg = arg+1) {
 				strBuilder.append(args[arg] + " ");
 			}

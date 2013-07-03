@@ -8,13 +8,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.SimpleCommandMap;
-import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.gmail.snipsrevival.commands.*;
 import com.gmail.snipsrevival.listeners.*;
 
-public class ModeratorNotes extends JavaPlugin implements Listener {
+public class ModeratorNotes extends JavaPlugin {
 	
 	public static ModeratorNotes plugin;
 	

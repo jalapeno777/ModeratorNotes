@@ -82,12 +82,6 @@ public class CommandMail implements CommandExecutor {
 	}
 	
 	public boolean readMail(CommandSender sender, String[] args) {
-		
-		File file = new File(plugin.getDataFolder() + "/userdata/" + sender.getName() + ".yml");
-		YamlConfiguration userFile = YamlConfiguration.loadConfiguration(file);
-		List<String> mailListNew = userFile.getStringList("mail.new");
-		List<String> mailListRead = userFile.getStringList("mail.read");
-		
 		if(!(sender instanceof Player)) {
 			sender.sendMessage(ChatColor.RED + "The console does not have a mailbox");
 			return true;
@@ -97,6 +91,12 @@ public class CommandMail implements CommandExecutor {
 			sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/mail read [page #] " + ChatColor.RED + "to read mail");
 			return true;
 		}
+		
+		File file = new File(plugin.getDataFolder() + "/userdata/" + sender.getName() + ".yml");
+		YamlConfiguration userFile = YamlConfiguration.loadConfiguration(file);
+		List<String> mailListNew = userFile.getStringList("mail.new");
+		List<String> mailListRead = userFile.getStringList("mail.read");
+		
 		if(!mailListNew.isEmpty()) {
 			sender.sendMessage(ChatColor.GOLD + "All Unread Mail for " + sender.getName());
 			for(int i = 0; i < mailListNew.size(); i++) {
@@ -135,7 +135,7 @@ public class CommandMail implements CommandExecutor {
 			}
 		}
 		catch (IllegalArgumentException e) { //ie args[1] is not a natural Number (1, 2, 3 etc)
-			sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/mail read [page #] " + ChatColor.RED + "to read mail");
+			sender.sendMessage(ChatColor.RED + "That is an invalid page number");
 		}
 		catch (IllegalStateException e) { //ie the inputList is empty
 			sender.sendMessage(ChatColor.RED + "You don't have any mail");
@@ -146,13 +146,7 @@ public class CommandMail implements CommandExecutor {
 		return true;
 	}
 	
-	public boolean removeSingleMail(CommandSender sender, String[] args) {
-		
-		File file = new File(plugin.getDataFolder() + "/userdata/" + sender.getName() + ".yml");
-		YamlConfiguration userFile = YamlConfiguration.loadConfiguration(file);
-		List<String> mailListNew = userFile.getStringList("mail.new");
-		List<String> mailListRead = userFile.getStringList("mail.read");
-		
+	public boolean removeSingleMail(CommandSender sender, String[] args) {	
 		if(!(sender instanceof Player)) {
 			sender.sendMessage(ChatColor.RED + "The console does not have a mailbox");
 			return true;
@@ -166,12 +160,18 @@ public class CommandMail implements CommandExecutor {
 			sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/mail remove <message #> " + ChatColor.RED + "to remove mail message");
 			return true;
 		}
+		
+		File file = new File(plugin.getDataFolder() + "/userdata/" + sender.getName() + ".yml");
+		YamlConfiguration userFile = YamlConfiguration.loadConfiguration(file);
+		List<String> mailListNew = userFile.getStringList("mail.new");
+		List<String> mailListRead = userFile.getStringList("mail.read");
+		
 		if(!mailListNew.isEmpty()) {
 			sender.sendMessage(ChatColor.RED + "You have unread mail! Read your mail first.");
 			return true;
 		}	
 		if(!common.isInt(args[1])) {
-			sender.sendMessage(ChatColor.RED + "That message does not exist");
+			sender.sendMessage(ChatColor.RED + "That is an message number");
 			return true;
 		}
 		
@@ -195,13 +195,7 @@ public class CommandMail implements CommandExecutor {
 		return true;
 	}
 	
-	public boolean removeAllMail(CommandSender sender, String[] args) {
-		
-		File file = new File(plugin.getDataFolder() + "/userdata/" + sender.getName() + ".yml");
-		YamlConfiguration userFile = YamlConfiguration.loadConfiguration(file);
-		List<String> mailListNew = userFile.getStringList("mail.new");
-		List<String> mailListRead = userFile.getStringList("mail.read");
-		
+	public boolean removeAllMail(CommandSender sender, String[] args) {	
 		if(!(sender instanceof Player)) {
 			sender.sendMessage(ChatColor.RED + "The console does not have a mailbox");
 			return true;
@@ -211,6 +205,12 @@ public class CommandMail implements CommandExecutor {
 			sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/mail removeall " + ChatColor.RED + "to remove all mail");
 			return true;
 		}
+		
+		File file = new File(plugin.getDataFolder() + "/userdata/" + sender.getName() + ".yml");
+		YamlConfiguration userFile = YamlConfiguration.loadConfiguration(file);
+		List<String> mailListNew = userFile.getStringList("mail.new");
+		List<String> mailListRead = userFile.getStringList("mail.read");
+		
 		if(!mailListNew.isEmpty()) {
 			sender.sendMessage(ChatColor.RED + "You have unread mail! Read your mail first.");
 			return true;

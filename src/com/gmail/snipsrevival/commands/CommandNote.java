@@ -155,7 +155,7 @@ public class CommandNote implements CommandExecutor {
 				}
 			}
 			catch (IllegalArgumentException e) { //ie args[1] is not a natural Number (1, 2, 3 etc)
-				sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/note list [page #] " + ChatColor.RED + "to show players with notes");
+				sender.sendMessage(ChatColor.RED + "That is an invalid page number");
 			}
 			catch (IllegalStateException e) { //ie the inputList is empty
 				sender.sendMessage(ChatColor.RED + "There are no players with notes");
@@ -218,7 +218,7 @@ public class CommandNote implements CommandExecutor {
 			}
 		}
 		catch (IllegalArgumentException e) { //ie args[2] is not a natural Number (1, 2, 3 etc)
-			sender.sendMessage(ChatColor.RED + "That is an invalid note number");
+			sender.sendMessage(ChatColor.RED + "That is an invalid page number");
 		}
 		catch (IllegalStateException e) { //ie the inputList is empty
 			sender.sendMessage(ChatColor.RED + "There are no notes for " + targetPlayer.getName());

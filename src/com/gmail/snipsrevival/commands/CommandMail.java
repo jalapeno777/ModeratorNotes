@@ -19,63 +19,63 @@ import com.gmail.snipsrevival.Prefix;
 public class CommandMail implements CommandExecutor {
 	
 	ModeratorNotes plugin;
+	CommonUtilities common;
 	
 	public CommandMail(ModeratorNotes plugin) {
 		this.plugin = plugin;
 	}
-	
-	CommonUtilities common = new CommonUtilities(ModeratorNotes.plugin);
-	
+			
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {	
-		if(cmd.getName().equalsIgnoreCase("mail")) {	
-			if(args.length == 0) {
-				if(sender.hasPermission("moderatornotes.mail.send")) {
-					sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/mail send <playername> <message> " + ChatColor.RED + "to send mail");
-				}
-				if(sender.hasPermission("moderatornotes.mail.sendall")) {
-					sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/mail sendall <message> " + ChatColor.RED + "to send mail to all players");
-				}
-				if(sender.hasPermission("moderatornotes.mail.sendstaff")) {
-					sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/mail sendstaff <message> " + ChatColor.RED + "to send mail to staff members");
-				}
-				if(sender.hasPermission("moderatornotes.mail.read")) {
-					sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/mail read " + ChatColor.RED + "to read mail");
-				}
-				if(sender.hasPermission("moderatornotes.mail.remove")) {
-					sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/mail removeall " + ChatColor.RED + "to remove all mail");
-					sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/mail remove <note #> " + ChatColor.RED + "to remove mail message");
-				}
-				if (!sender.hasPermission("moderatornotes.mail.send") &&
-						!sender.hasPermission("moderatornotes.mail.sendall") &&
-						!sender.hasPermission("moderatornotes.mail.sendstaff") &&
-						!sender.hasPermission("moderatornotes.mail.read") &&
-						!sender.hasPermission("moderatornotes.mail.remove")) {
-					sender.sendMessage(ChatColor.RED + "You don't have permission to use that command");
-				}
+		
+		this.common = new CommonUtilities(plugin);
+
+		if(args.length == 0) {
+			if(sender.hasPermission("moderatornotes.mail.send")) {
+				sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/mail send <playername> <message> " + ChatColor.RED + "to send mail");
+			}
+			if(sender.hasPermission("moderatornotes.mail.sendall")) {
+				sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/mail sendall <message> " + ChatColor.RED + "to send mail to all players");
+			}
+			if(sender.hasPermission("moderatornotes.mail.sendstaff")) {
+				sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/mail sendstaff <message> " + ChatColor.RED + "to send mail to staff members");
+			}
+			if(sender.hasPermission("moderatornotes.mail.read")) {
+				sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/mail read " + ChatColor.RED + "to read mail");
+			}
+			if(sender.hasPermission("moderatornotes.mail.remove")) {
+				sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/mail removeall " + ChatColor.RED + "to remove all mail");
+				sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/mail remove <note #> " + ChatColor.RED + "to remove mail message");
+			}
+			if (!sender.hasPermission("moderatornotes.mail.send") &&
+					!sender.hasPermission("moderatornotes.mail.sendall") &&
+					!sender.hasPermission("moderatornotes.mail.sendstaff") &&
+					!sender.hasPermission("moderatornotes.mail.read") &&
+					!sender.hasPermission("moderatornotes.mail.remove")) {
+				sender.sendMessage(ChatColor.RED + "You don't have permission to use that command");
+			}
+		}
+		else {
+			if(args[0].equalsIgnoreCase("read") && sender.hasPermission("moderatornotes.mail.read")) {
+				readMail(sender, args);
+			}
+			else if(args[0].equalsIgnoreCase("remove") && sender.hasPermission("moderatornotes.mail.remove")) {
+				removeSingleMail(sender, args);
+			}
+			else if(args[0].equalsIgnoreCase("removeall") && sender.hasPermission("moderatornotes.mail.remove")) {
+				removeAllMail(sender, args);
+			}
+			else if(args[0].equalsIgnoreCase("send") && sender.hasPermission("moderatornotes.mail.send")) {
+				sendMail(sender, args);
+			}
+			else if(args[0].equalsIgnoreCase("sendall") && sender.hasPermission("moderatornotes.mail.sendall")) {
+				sendAllMail(sender, args);
+			}
+			else if(args[0].equalsIgnoreCase("sendstaff") && sender.hasPermission("moderatornotes.mail.sendstaff")) {
+				sendStaffMail(sender, args);
 			}
 			else {
-				if(args[0].equalsIgnoreCase("read") && sender.hasPermission("moderatornotes.mail.read")) {
-					readMail(sender, args);
-				}
-				else if(args[0].equalsIgnoreCase("remove") && sender.hasPermission("moderatornotes.mail.remove")) {
-					removeSingleMail(sender, args);
-				}
-				else if(args[0].equalsIgnoreCase("removeall") && sender.hasPermission("moderatornotes.mail.remove")) {
-					removeAllMail(sender, args);
-				}
-				else if(args[0].equalsIgnoreCase("send") && sender.hasPermission("moderatornotes.mail.send")) {
-					sendMail(sender, args);
-				}
-				else if(args[0].equalsIgnoreCase("sendall") && sender.hasPermission("moderatornotes.mail.sendall")) {
-					sendAllMail(sender, args);
-				}
-				else if(args[0].equalsIgnoreCase("sendstaff") && sender.hasPermission("moderatornotes.mail.sendstaff")) {
-					sendStaffMail(sender, args);
-				}
-				else {
-					sender.sendMessage(ChatColor.RED + "You don't have permission to use that command");
-				}
+				sender.sendMessage(ChatColor.RED + "You don't have permission to use that command");
 			}
 		}
 		return true;

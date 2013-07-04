@@ -19,58 +19,58 @@ import com.gmail.snipsrevival.Prefix;
 public class CommandNote implements CommandExecutor {
 	
 	ModeratorNotes plugin;
+	CommonUtilities common;
 	
 	public CommandNote(ModeratorNotes plugin) {
 		this.plugin = plugin;
 	}
-	
-	CommonUtilities common = new CommonUtilities(ModeratorNotes.plugin);
-
+		
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) { 
-		if(cmd.getName().equalsIgnoreCase("note")) {				
-			if(args.length == 0) {
-				if(sender.hasPermission("moderatornotes.note.add")) {
-					sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/note add <playername> <message> " + ChatColor.RED + "to add note");
-				}
-				if(sender.hasPermission("moderatornotes.note.read")) {
-					sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/note list [page #] " + ChatColor.RED + "to show players with notes");
-					sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/note read <playername> [page #] " + ChatColor.RED + "to read notes");
-				}
-				if(sender.hasPermission("moderatornotes.note.read.self") && !sender.hasPermission("moderatornotes.note.read")) {
-					sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/note read <playername> [page #] " + ChatColor.RED + "to read notes");
-				}
-				if(sender.hasPermission("moderatornotes.note.remove")) {
-					sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/note removeall <playername> " + ChatColor.RED + "to remove all notes");
-					sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/note remove <playername> <note #> " + ChatColor.RED + "to remove note");
-				}
-				if(!sender.hasPermission("moderatornotes.note.add") &&
-						!sender.hasPermission("moderatornotes.note.read") &&
-						!sender.hasPermission("moderatornotes.note.read.self") &&
-						!sender.hasPermission("moderatornotes.note.remove")) {
-					sender.sendMessage(ChatColor.RED + "You don't have permission to use that command");
-				}
+		
+		this.common = new CommonUtilities(plugin);
+
+		if(args.length == 0) {
+			if(sender.hasPermission("moderatornotes.note.add")) {
+				sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/note add <playername> <message> " + ChatColor.RED + "to add note");
 			}
-			
+			if(sender.hasPermission("moderatornotes.note.read")) {
+				sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/note list [page #] " + ChatColor.RED + "to show players with notes");
+				sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/note read <playername> [page #] " + ChatColor.RED + "to read notes");
+			}
+			if(sender.hasPermission("moderatornotes.note.read.self") && !sender.hasPermission("moderatornotes.note.read")) {
+				sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/note read <playername> [page #] " + ChatColor.RED + "to read notes");
+			}
+			if(sender.hasPermission("moderatornotes.note.remove")) {
+				sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/note removeall <playername> " + ChatColor.RED + "to remove all notes");
+				sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/note remove <playername> <note #> " + ChatColor.RED + "to remove note");
+			}
+			if(!sender.hasPermission("moderatornotes.note.add") &&
+					!sender.hasPermission("moderatornotes.note.read") &&
+					!sender.hasPermission("moderatornotes.note.read.self") &&
+					!sender.hasPermission("moderatornotes.note.remove")) {
+				sender.sendMessage(ChatColor.RED + "You don't have permission to use that command");
+			}
+		}
+		
+		else {
+			if(args[0].equalsIgnoreCase("add") && sender.hasPermission("moderatornotes.note.add")) {
+				addNote(sender, args);
+			}
+			else if(args[0].equalsIgnoreCase("list") && sender.hasPermission("moderatornotes.note.read")) {
+				listPlayers(sender, args);
+			}
+			else if(args[0].equalsIgnoreCase("read") && (sender.hasPermission("moderatornotes.note.read") || sender.hasPermission("moderatornotes.note.read.self"))) {
+				readNotes(sender, args);
+			}
+			else if(args[0].equalsIgnoreCase("remove") && sender.hasPermission("moderatornotes.note.remove")) {
+				removeSingleNote(sender, args);
+			}
+			else if(args[0].equalsIgnoreCase("removeall") && sender.hasPermission("moderatornotes.note.remove")) {
+				removeAllNotes(sender, args);
+			}
 			else {
-				if(args[0].equalsIgnoreCase("add") && sender.hasPermission("moderatornotes.note.add")) {
-					addNote(sender, args);
-				}
-				else if(args[0].equalsIgnoreCase("list") && sender.hasPermission("moderatornotes.note.read")) {
-					listPlayers(sender, args);
-				}
-				else if(args[0].equalsIgnoreCase("read") && (sender.hasPermission("moderatornotes.note.read") || sender.hasPermission("moderatornotes.note.read.self"))) {
-					readNotes(sender, args);
-				}
-				else if(args[0].equalsIgnoreCase("remove") && sender.hasPermission("moderatornotes.note.remove")) {
-					removeSingleNote(sender, args);
-				}
-				else if(args[0].equalsIgnoreCase("removeall") && sender.hasPermission("moderatornotes.note.remove")) {
-					removeAllNotes(sender, args);
-				}
-				else {
-					sender.sendMessage(ChatColor.RED + "You don't have permission to use that command");
-				}
+				sender.sendMessage(ChatColor.RED + "You don't have permission to use that command");
 			}
 		}
 		return true;

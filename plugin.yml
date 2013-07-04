@@ -1,6 +1,6 @@
 name: ModeratorNotes
 main: com.gmail.snipsrevival.ModeratorNotes
-version: 2.0.2
+version: 2.0.3
 author: SnipsRevival
 description: Create notes about players to keep your staff informed at all times!
 load: STARTUP

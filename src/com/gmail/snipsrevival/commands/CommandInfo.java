@@ -80,7 +80,7 @@ public class CommandInfo implements CommandExecutor {
 					}
 				}
 				catch (IllegalArgumentException e) { //ie args[1] is not a natural Number (1, 2, 3 etc)
-					sender.sendMessage(ChatColor.GREEN + "Use " + ChatColor.WHITE + "/info " + topic.toLowerCase() + " [page #]" + ChatColor.GREEN + " for more information");
+					sender.sendMessage(ChatColor.RED + "That is an invalid page number");
 				}
 				catch (IllegalStateException e) { //ie the inputList is empty
 					sender.sendMessage(ChatColor.RED + "There is no information for the topic " + topic);

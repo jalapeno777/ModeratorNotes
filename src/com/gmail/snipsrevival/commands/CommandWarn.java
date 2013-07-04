@@ -33,6 +33,7 @@ public class CommandWarn implements CommandExecutor {
 				return true;
 			}
 			if(args.length < 2) {
+				sender.sendMessage(ChatColor.RED + "Too few arguments!");
 				sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/warn <playername> <reason> " + ChatColor.RED + "to warn player");
 				return true;
 			}

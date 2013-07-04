@@ -152,6 +152,7 @@ public class CommandMail implements CommandExecutor {
 			return true;
 		}
 		if(args.length < 2) {
+			sender.sendMessage(ChatColor.RED + "Too few arguments!");
 			sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/mail remove <note #> " + ChatColor.RED + "to remove mail message");
 			return true;
 		}
@@ -171,7 +172,7 @@ public class CommandMail implements CommandExecutor {
 			return true;
 		}	
 		if(!common.isInt(args[1])) {
-			sender.sendMessage(ChatColor.RED + "That is an message number");
+			sender.sendMessage(ChatColor.RED + "That is an invalid message number");
 			return true;
 		}
 		
@@ -224,6 +225,7 @@ public class CommandMail implements CommandExecutor {
 	
 	public boolean sendMail(CommandSender sender, String[] args) {
 		if(args.length < 3) {
+			sender.sendMessage(ChatColor.RED + "Too few arguments!");
 			sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/mail send <playername> <message> " + ChatColor.RED + "to send message to player");
 			return true;
 		}
@@ -262,6 +264,7 @@ public class CommandMail implements CommandExecutor {
 	
 	public boolean sendAllMail(CommandSender sender, String[] args) {
 		if(args.length < 2) {
+			sender.sendMessage(ChatColor.RED + "Too few arguments!");
 			sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/mail sendall <message> " + ChatColor.RED + "to send message to all players");
 			return true;
 		}
@@ -291,6 +294,7 @@ public class CommandMail implements CommandExecutor {
 	
 	public boolean sendStaffMail(CommandSender sender, String[] args) {
 		if(args.length < 2) {
+			sender.sendMessage(ChatColor.RED + "Too few arguments!");
 			sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/mail sendstaff <message> " + ChatColor.RED + "to send message to all staff");
 			return true;
 		}

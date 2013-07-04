@@ -33,6 +33,7 @@ public class CommandReloadConfig implements CommandExecutor {
 					sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/moderatornotes reload " + ChatColor.RED + "to reload the config");
 				}
 				if (args.length == 0) {
+					sender.sendMessage(ChatColor.RED + "Too few arguments!");
 					sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/moderatornotes reload " + ChatColor.RED + "to reload the config");
 				}
 			}

@@ -37,6 +37,7 @@ public class CommandTempmute implements CommandExecutor {
 				return true;
 			}
 			if(args.length < 3) {
+				sender.sendMessage(ChatColor.RED + "Too few arguments!");
 				sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/tempmute <playername> <time> <reason> " + ChatColor.RED + "to tempmute player");
 				return true;
 			}	

@@ -33,6 +33,7 @@ public class CommandMute implements CommandExecutor {
 				return true;
 			}
 			if(args.length < 2) {
+				sender.sendMessage(ChatColor.RED + "Too few arguments!");
 				sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/mute <playername> <reason> " + ChatColor.RED + "to mute player");
 				return true;
 			}

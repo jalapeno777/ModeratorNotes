@@ -33,6 +33,7 @@ public class CommandUnban implements CommandExecutor {
 				return true;
 			}
 			if(args.length < 2) {
+				sender.sendMessage(ChatColor.RED + "Too few arguments!");
 				sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/unban <playername> <reason> " + ChatColor.RED + "to tempban player");
 				return true;
 			}

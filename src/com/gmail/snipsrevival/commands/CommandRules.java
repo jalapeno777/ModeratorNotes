@@ -53,7 +53,7 @@ public class CommandRules implements CommandExecutor {
 				}
 			}
 			catch (IllegalArgumentException e) { //ie args[0] is not a natural Number (1, 2, 3 etc)
-				sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/rules [page #] " + ChatColor.RED + "to show the rules");
+				sender.sendMessage(ChatColor.RED + "That is an invalid page number");
 			}
 			catch (IllegalStateException e) { //ie the original list is empty
 				sender.sendMessage(ChatColor.RED + "No rules have been listed");

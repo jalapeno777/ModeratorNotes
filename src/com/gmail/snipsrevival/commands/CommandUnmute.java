@@ -33,6 +33,7 @@ public class CommandUnmute implements CommandExecutor {
 				return true;
 			}
 			if(args.length < 2) {
+				sender.sendMessage(ChatColor.RED + "Too few arguments!");
 				sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/unmute <playername> <reason> " + ChatColor.RED + "to unmute player");
 				return true;
 			}

@@ -37,6 +37,7 @@ public class CommandTempban implements CommandExecutor {
 				return true;
 			}
 			if(args.length < 3) {
+				sender.sendMessage(ChatColor.RED + "Too few arguments!");
 				sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/tempban <playername> <time> <reason> " + ChatColor.RED + "to tempban player");
 				return true;
 			}

@@ -78,6 +78,7 @@ public class CommandNote implements CommandExecutor {
 	
 	public boolean addNote(CommandSender sender, String[] args) { 
 		if(args.length < 3) {
+			sender.sendMessage(ChatColor.RED + "Too few arguments!");
 			sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/note add <playername> <message> " + ChatColor.RED + "to add note");
 			return true;
 		}
@@ -169,6 +170,7 @@ public class CommandNote implements CommandExecutor {
 
 	public boolean readNotes(CommandSender sender, String[] args) {	
 		if(args.length < 2) {
+			sender.sendMessage(ChatColor.RED + "Too few arguments!");
 			sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/note read <playername> [page #] " + ChatColor.RED + "to read notes");
 			return true;
 		}
@@ -231,6 +233,7 @@ public class CommandNote implements CommandExecutor {
 	
 	public boolean removeSingleNote(CommandSender sender, String[] args) { 	
 		if(args.length < 3) {
+			sender.sendMessage(ChatColor.RED + "Too few arguments!");
 			sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/note remove <playername> <note #> " + ChatColor.RED + "to remove note");
 			return true;
 		}
@@ -278,6 +281,7 @@ public class CommandNote implements CommandExecutor {
 	
 	public boolean removeAllNotes(CommandSender sender, String[] args) { 
 		if(args.length < 2) {
+			sender.sendMessage(ChatColor.RED + "Too few arguments!");
 			sender.sendMessage(ChatColor.RED + "Use " + ChatColor.WHITE + "/note removeall <playername> " + ChatColor.RED + "to remove all notes");
 			return true;
 		}

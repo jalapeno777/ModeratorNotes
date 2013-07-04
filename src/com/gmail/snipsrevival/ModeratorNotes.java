@@ -15,9 +15,7 @@ import com.gmail.snipsrevival.listeners.*;
 
 public class ModeratorNotes extends JavaPlugin {
 	
-	public static ModeratorNotes plugin;
-	
-	CommonUtilities common = new CommonUtilities();	
+	CommonUtilities common;
 	
 	private static Object getPrivateField(Object object, String field) throws SecurityException,
     NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
@@ -51,7 +49,7 @@ public class ModeratorNotes extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		
-		plugin = this;
+		this.common = new CommonUtilities(this);
 				
 		if(getConfig().getBoolean("EnableUpdateChecker") == true) {
 			Updater updater = new Updater(this);
@@ -159,10 +157,5 @@ public class ModeratorNotes extends JavaPlugin {
 			}
 			exemptPlayerDir.delete();
 		}
-	}
-	
-	@Override
-	public void onDisable() {
-		plugin = null;
 	}
 }

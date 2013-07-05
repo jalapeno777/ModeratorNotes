@@ -148,9 +148,7 @@ public class PlayerListener implements Listener {
 		Player player = event.getPlayer();
 		File file = new File(plugin.getDataFolder() + "/userdata/" + player.getName().toLowerCase() + ".yml");
 		YamlConfiguration userFile = YamlConfiguration.loadConfiguration(file);
-		
-		//TODO: fix tempban player check
-		
+				
 		if(player.isBanned()) {
 			if(userFile.get("permaban.reason") == null) {
 				event.setKickMessage("You were banned from this server");
@@ -161,7 +159,7 @@ public class PlayerListener implements Listener {
 			return;
 		}
 		
-		else if(!player.isBanned()) {
+		if(!player.isBanned()) {
 			if(userFile.get("permaban.reason") != null) {
 				userFile.set("permaban", null);
 				common.saveYamlFile(userFile, file);
@@ -170,7 +168,7 @@ public class PlayerListener implements Listener {
 			
 		}
 		
-		else if(userFile.get("tempban.end") != null) {
+		if(userFile.get("tempban.end") != null) {
 			if((System.currentTimeMillis()/1000) >= userFile.getDouble("tempban.end")) {
 				userFile.set("tempban", null);
 				common.saveYamlFile(userFile, file);
